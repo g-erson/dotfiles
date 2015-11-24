@@ -16,11 +16,9 @@ Bundle 'gmarik/vundle'
 " The following are examples of different formats supported.
 " Keep bundle commands between here and filetype plugin indent on.
 " scripts on GitHub repos
-Bundle 'ap/vim-css-color'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-fireplace'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'ronny/birds-of-paradise.vim'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'guns/vim-clojure-static'
 " The sparkup vim script is in a subdirectory of this repo called vim.
@@ -44,17 +42,18 @@ filetype plugin indent on     " required
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle commands are not allowed.
 "
-"=========================== Set 24 bit colour ==============================
-let NVIM_TUI_ENABLE_TRUE_COLOR=1
 "============================== Sets Line Numbering on ======================
 set nu
 set relativenumber
+
 "============================== Sets colour syntax on =======================
 syn on!
+
 "============================ Sets indentation correctly ====================
 set autoindent
 set smartindent
 set shiftround
+
 "============================== Set expandtab correctly =====================
 let _curfile = expand("%:t")
 if _curfile =~ "Makefile" || _curfile =~ "makefile" || _curfile =~ ".*\.mk"
@@ -71,10 +70,10 @@ vnoremap < <gv
 vnoremap > >gv
 
 "=========================== Easy split window navigation ===================
-nn <C-h> <C-w>h
-nn <C-j> <C-w>j
-nn <C-k> <C-w>k
-nn <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 "================================ Turn Swap files off =======================
 set noswapfile
@@ -87,7 +86,7 @@ set sidescrolloff=15
 set sidescroll=1
 
 "==================== Automatically reload .vimrc when saved ================
-au BufWritePost .nvimrc so ~/.nvimrc
+au BufWritePost .vimrc so ~/.vimrc
 
 "============================== Remap leader to comma =======================
 let mapleader = ","
@@ -103,17 +102,16 @@ endfunction
 imap <Tab> <C-R>=SuperTab()<CR>
 "=================================== Colourscheme ===========================
 set background=dark
-"let g:solarized_termcolors = 16
-"let g:solarized_termtrans = 1
-colorscheme birds-of-paradise
-"colorscheme solarized
-highlight Comment cterm=italic
+let g:solarized_termcolors = 16
+let g:solarized_termtrans = 1
+colorscheme solarized
+"highlight Comment cterm=italic
 highlight cCustomFunc cterm=bold ctermfg=magenta
 highlight cCustomClass cterm=bold ctermfg=lightblue
 "================================== Remap Esc Key ===========================
 imap jk <Esc>
 "============================= Set Clipboard to Sys Clipboard ===============
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 "================================= Folding ==================================
 set foldmethod=syntax
-set foldnestmax=2
+set foldnestmax=1

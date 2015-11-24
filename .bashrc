@@ -22,3 +22,12 @@ fi
 								    
 # aliases
 alias ls="ls -G"
+
+# MacPorts Installer addition on 2015-02-21_at_18:19:07: adding an appropriate PATH variable for use with MacPorts.
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+# Finished adapting your PATH environment variable for use with MacPorts.
+export ASAN_SYMBOLIZER_PATH=/usr/bin/llvm-symbolizer-3.4
+export ASAN_OPTIONS="log_path=${HOME}/.logs/asan" or export ASAN_OPTIONS="detect_leaks=1:log_path=${HOME}/.logs/asan" 
+export MSAN_SYMBOLIZER_PATH=/usr/bin/llvm-symbolizer-3.4
+export TSAN_OPTIONS="external_symbolizer_path=/usr/bin/llvm-symbolizer-3.4 log_path=${HOME}/.logs/tsan"
+
