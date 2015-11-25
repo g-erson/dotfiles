@@ -71,10 +71,10 @@ vnoremap < <gv
 vnoremap > >gv
 
 "=========================== Easy split window navigation ===================
-nn <C-h> <C-w>h
-nn <C-j> <C-w>j
-nn <C-k> <C-w>k
-nn <C-l> <C-w>l
+"nnoremap <C-h> <C-w>h
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-k> <C-w>k
+"nnoremap <C-l> <C-w>l
 
 "================================ Turn Swap files off =======================
 set noswapfile
@@ -102,11 +102,7 @@ function! SuperTab()
 endfunction
 imap <Tab> <C-R>=SuperTab()<CR>
 "=================================== Colourscheme ===========================
-set background=dark
-"let g:solarized_termcolors = 16
-"let g:solarized_termtrans = 1
 colorscheme birds-of-paradise
-"colorscheme solarized
 highlight Comment cterm=italic
 highlight cCustomFunc cterm=bold ctermfg=magenta
 highlight cCustomClass cterm=bold ctermfg=lightblue

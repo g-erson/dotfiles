@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/Users/George'
 let g:netrw_dirhist_2='/Users/George/Documents/Programs/Java/WebCrawl/src'
 let g:netrw_dirhist_3='/Users/George/Documents/HCI/HCI Study 3/Core Files'
@@ -7,3 +7,4 @@ let g:netrw_dirhist_4='/Users/George/Documents/CompSci/SCC212/Lab2 Resources/lib
 let g:netrw_dirhist_5='/Users/George/Documents/CompSci/SCC212/Lab2 Resources'
 let g:netrw_dirhist_6='/Users/George/Documents/CompSci/SCC212/Lab2 Resources/lib'
 let g:netrw_dirhist_7='/Users/George/Documents/Programs/Python/SCC212'
+let g:netrw_dirhist_8='/Users/George/Documents/CompSci/SCC202/HCI/HCI Study 3/Core Files'
