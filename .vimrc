@@ -1,6 +1,3 @@
-"set nocompatible              " be iMproved, required
-
-"filetype off                  " required
 filetype plugin indent on
 
 " set the runtime path to include Vundle and initialize
@@ -19,8 +16,9 @@ Bundle 'gmarik/vundle'
 Bundle 'ap/vim-css-color'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-fireplace'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'ronny/birds-of-paradise.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'guns/vim-clojure-static'
 " The sparkup vim script is in a subdirectory of this repo called vim.
@@ -71,10 +69,17 @@ vnoremap < <gv
 vnoremap > >gv
 
 "=========================== Easy split window navigation ===================
-"nnoremap <C-h> <C-w>h
-"nnoremap <C-j> <C-w>j
-"nnoremap <C-k> <C-w>k
-"nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+" ======================== scrooloose/syntastic settings ====================
+let g:syntastic_error_symbol = '✘'
+let g:syntastic_warning_symbol = "▲"
+augroup mySyntastic
+  au!
+  au FileType tex let b:syntastic_mode = "passive"
+augroup END
 
 "================================ Turn Swap files off =======================
 set noswapfile
@@ -89,8 +94,12 @@ set sidescroll=1
 "==================== Automatically reload .vimrc when saved ================
 au BufWritePost .nvimrc so ~/.nvimrc
 
-"============================== Remap leader to comma =======================
+"==============================  leader shortcuts ===========================
 let mapleader = ","
+nnoremap <leader>n :NERDTree<enter>
+nnoremap <leader>c <C-w>c
+nnoremap <leader>q <C-w>q
+nnoremap <leader>T <C-w>T:NERDTree<enter>
 
 "============================ Use Tab for auto completion ===================
 function! SuperTab()
@@ -103,9 +112,6 @@ endfunction
 imap <Tab> <C-R>=SuperTab()<CR>
 "=================================== Colourscheme ===========================
 colorscheme birds-of-paradise
-highlight Comment cterm=italic
-highlight cCustomFunc cterm=bold ctermfg=magenta
-highlight cCustomClass cterm=bold ctermfg=lightblue
 "================================== Remap Esc Key ===========================
 imap jk <Esc>
 "============================= Set Clipboard to Sys Clipboard ===============
