@@ -1,7 +1,7 @@
 filetype plugin indent on
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 " alternatively, pass a path where Vundle should install bundles
 "let path = '~/some/path/here'
@@ -17,7 +17,7 @@ Bundle 'ap/vim-css-color'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-fireplace'
 Bundle 'tpope/vim-rails'
-Bundle 'ronny/birds-of-paradise.vim'
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'vim-ruby/vim-ruby'
@@ -113,11 +113,11 @@ function! SuperTab()
 endfunction
 imap <Tab> <C-R>=SuperTab()<CR>
 "=================================== Colourscheme ===========================
-colorscheme birds-of-paradise
+colorscheme solarized
 "================================== Remap Esc Key ===========================
 imap jk <Esc>
 "============================= Set Clipboard to Sys Clipboard ===============
 set clipboard+=unnamedplus
 "================================= Folding ==================================
-set foldmethod=syntax
-set foldnestmax=2
+"set foldmethod=syntax
+"set foldnestmax=2
