@@ -13,13 +13,14 @@ Bundle 'gmarik/vundle'
 " The following are examples of different formats supported.
 " Keep bundle commands between here and filetype plugin indent on.
 " scripts on GitHub repos
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'ap/vim-css-color'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-fireplace'
 Bundle 'tpope/vim-rails'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
+"Bundle 'scrooloose/syntastic'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'guns/vim-clojure-static'
