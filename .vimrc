@@ -22,6 +22,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'scrooloose/nerdtree'
 "Bundle 'scrooloose/syntastic'
 Bundle 'vim-ruby/vim-ruby'
+Bundle 'peterhoeg/vim-qml'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'guns/vim-clojure-static'
 " The sparkup vim script is in a subdirectory of this repo called vim.
@@ -100,6 +101,8 @@ au BufWritePost .nvimrc so ~/.nvimrc
 "==============================  leader shortcuts ===========================
 let mapleader = ","
 nnoremap <leader>n :NERDTree<enter>
+nnoremap <leader>s <C-w>s
+nnoremap <leader>v <C-w>v
 nnoremap <leader>c <C-w>c
 nnoremap <leader>q <C-w>q
 nnoremap <leader>T <C-w>T:NERDTree<enter>
@@ -122,3 +125,5 @@ set clipboard+=unnamedplus
 "================================= Folding ==================================
 "set foldmethod=syntax
 "set foldnestmax=2
+"=================================== Detect QML Syntax ======================
+au BufNewFile,BufRead *.qml set filetype=qml

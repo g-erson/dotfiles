@@ -1,9 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/George/Downloads/Lab4-5 Download Package/Core Files'
-let g:netrw_dirhist_2='/Users/George/Documents/CompSci/SCC202/HCI/HCI Study 3/Core Files'
-let g:netrw_dirhist_3='/Users/George/Documents/CompSci/SCC202/HCI/HCI Study 3'
-let g:netrw_dirhist_4='/Users/George/Documents/CompSci/SCC202/HCI'
-let g:netrw_dirhist_5='/Users/George/Documents/CompSci/SCC202'
-let g:netrw_dirhist_6='/Users/George/Documents/CompSci'
-let g:netrw_dirhist_7='/Users/George/Documents/Programs/Java/Ext2Reader'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/mnt/remote/home/g/Documents/bigfoot'
+let g:netrw_dirhist_2='/mnt/remote/home/g/Documents/bigfoot/bigfoot_www'
+let g:netrw_dirhist_3='/mnt/remote/home/g/Documents/bigfoot/bigfoot_www/packages'
+let g:netrw_dirhist_4='/mnt/remote/home/g/Documents/bigfoot/bigfoot_www/packages/alpha'
+let g:netrw_dirhist_5='/mnt/remote/home/g/Documents/bigfoot/bigfoot_www/packages/alpha/amd64'
