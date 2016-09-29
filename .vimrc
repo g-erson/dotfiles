@@ -2,7 +2,7 @@ filetype plugin indent on
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
+call vundle#begin()
 " alternatively, pass a path where Vundle should install bundles
 "let path = '~/some/path/here'
 "call vundle#rc(path)
@@ -35,6 +35,7 @@ Bundle 'git://git.wincent.com/command-t.git'
 "Bundle 'file:///home/gmarik/path/to/plugin'
 " ...
 
+call vundle#end()
 filetype plugin indent on     " required
 "
 " Brief help
