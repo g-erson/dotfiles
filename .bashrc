@@ -37,5 +37,5 @@ export TSAN_OPTIONS="external_symbolizer_path=/usr/bin/llvm-symbolizer-3.4 log_p
 export HOMEBREW_GITHUB_API_TOKEN=37919efef00d1e11e804868766b960dd04d84686
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
-echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+#echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
