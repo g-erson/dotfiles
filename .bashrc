@@ -25,6 +25,7 @@ fi
 								    
 # aliases
 alias ls="ls -G"
+alias tmux="TERM=screen-256color-bce tmux"
 
 # MacPorts Installer addition on 2015-02-21_at_18:19:07: adding an appropriate PATH variable for use with MacPorts.
 export PATH="/usr/local/bin:/opt/local/bin:/opt/local/sbin:/usr/local/opt/android-sdk:/Users/George/.local/lib/aws/bin/:/Users/George/Documents/Programs/C/neovim/bin:$PATH"

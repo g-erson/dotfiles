@@ -8,41 +8,46 @@ call vundle#begin()
 "call vundle#rc(path)
 
 " let Vundle manage Vundle, required
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " The following are examples of different formats supported.
 " Keep bundle commands between here and filetype plugin indent on.
 " scripts on GitHub repos
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'ap/vim-css-color'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-fireplace'
-Bundle 'tpope/vim-rails'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'scrooloose/nerdtree'
-"Bundle 'scrooloose/syntastic'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'peterhoeg/vim-qml'
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'guns/vim-clojure-static'
+Plugin 'Valloric/YouCompleteMe' "This is just the client. Install server
+                                "with ./<plugin location>/install.sh
+                                " --clang-completer
+Plugin 'ap/vim-css-color'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fireplace'
+Plugin 'tpope/vim-rails'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'scrooloose/nerdtree'
+"Plugin 'scrooloose/syntastic'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'peterhoeg/vim-qml'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'guns/vim-clojure-static'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " scripts from http://vim-scripts.org/vim/scripts.html
 " scripts not on GitHub
-Bundle 'git://git.wincent.com/command-t.git'
+Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
-"Bundle 'file:///home/gmarik/path/to/plugin'
+"Plugin 'file:///home/gmarik/path/to/plugin'
 " ...
 
 call vundle#end()
 filetype plugin indent on     " required
 "
 " Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install (update) bundles
-" :BundleSearch(!) foo - search (or refresh cache first) for foo
-" :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
+" :PluginList          - list configured bundles
+" :PluginInstall(!)    - install (update) bundles
+" :PluginSearch(!) foo - search (or refresh cache first) for foo
+" :PluginClean(!)      - confirm (or auto-approve) removal of unused bundles
 "
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle commands are not allowed.
@@ -118,13 +123,25 @@ function! SuperTab()
 endfunction
 imap <Tab> <C-R>=SuperTab()<CR>
 "=================================== Colourscheme ===========================
+set background=dark
 colorscheme solarized
 "================================== Remap Esc Key ===========================
 imap jk <Esc>
 "============================= Set Clipboard to Sys Clipboard ===============
 set clipboard+=unnamedplus
-"================================= Folding ==================================
-"set foldmethod=syntax
-"set foldnestmax=2
+"============================= Fix Backspace ================================
+set backspace=2
 "=================================== Detect QML Syntax ======================
 au BufNewFile,BufRead *.qml set filetype=qml
+"============================= Debug flags for YCM Server ===================
+let g:ycm_global_ycm_extra_conf = '/Users/George/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
+let g:ycm_path_to_ptyhon_interpreter = '/opt/local/bin/python2.7'
+let g:ycm_confirm_extra_conf = 0
+"============================ Airline Config =================================
+let g:airline_powerline_fonts = 1 "git clone git@github.com:powerline/fonts.git
+                                  "./install.sh
+let g:airline_theme = 'durant'
+if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+  endif
+let g:airline_symbols.space = "\ua0"
