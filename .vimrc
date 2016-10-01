@@ -133,10 +133,6 @@ set clipboard+=unnamedplus
 set backspace=2
 "=================================== Detect QML Syntax ======================
 au BufNewFile,BufRead *.qml set filetype=qml
-"============================= Debug flags for YCM Server ===================
-let g:ycm_global_ycm_extra_conf = '/Users/George/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
-let g:ycm_path_to_ptyhon_interpreter = '/opt/local/bin/python2.7'
-let g:ycm_confirm_extra_conf = 0
 "============================ Airline Config =================================
 let g:airline_powerline_fonts = 1 "git clone git@github.com:powerline/fonts.git
                                   "./install.sh
