@@ -27,8 +27,8 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'peterhoeg/vim-qml'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'guns/vim-clojure-static'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-airline/vim-airline-themes'
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
@@ -83,15 +83,13 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-tnoremap <C-h> <C-\><C-n><C-h>
-tnoremap <C-j> <C-\><C-n><C-j>
-tnoremap <C-k> <C-\><C-n><C-k>
-tnoremap <C-l> <C-\><C-n><C-l>
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
 
-autocmd WinEnter *
- \ if &buftype ==# 'terminal'
- \  startinsert
- \ endif
+autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd BufLeave term://* stopinsert
 
 " ======================== scrooloose/syntastic settings ====================
 let g:syntastic_error_symbol = '✘'
@@ -121,7 +119,7 @@ nnoremap <leader>s <C-w>s
 nnoremap <leader>v <C-w>v
 nnoremap <leader>c <C-w>c
 nnoremap <leader>q <C-w>q
-nnoremap <leader>t :tabnew
+nnoremap <leader>t :tabnew<enter>
 nnoremap <leader>T <C-w>T:NERDTree<enter>
 
 "============================ Use Tab for auto completion ===================
@@ -145,10 +143,13 @@ set backspace=2
 "=================================== Detect QML Syntax ======================
 au BufNewFile,BufRead *.qml set filetype=qml
 "============================ Airline Config =================================
-let g:airline_powerline_fonts = 1 "git clone git@github.com:powerline/fonts.git
-                                  "./install.sh
-let g:airline_theme = 'durant'
-if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-  endif
-let g:airline_symbols.space = "\ua0"
+"
+"###### USE ONI ######
+"
+"let g:airline_powerline_fonts = 1 "git clone git@github.com:powerline/fonts.git
+"                                  "./install.sh
+"let g:airline_theme = 'durant'
+"if !exists('g:airline_symbols')
+"      let g:airline_symbols = {}
+"  endif
+"let g:airline_symbols.space = "\ua0"
