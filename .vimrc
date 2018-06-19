@@ -29,16 +29,19 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'guns/vim-clojure-static'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'posva/vim-vue'
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " scripts from http://vim-scripts.org/vim/scripts.html
 " scripts not on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
+"Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
 "Plugin 'file:///home/gmarik/path/to/plugin'
 " ...
+"Configure ctrlp
+set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 call vundle#end()
 filetype plugin indent on     " required
@@ -63,6 +66,9 @@ syn on!
 set autoindent
 set smartindent
 set shiftround
+"============================ Vue file fancy markup =========================
+let g:vue_disable_pre_processors = 1
+au BufNewFile,BufRead *.vue set filetype=vue
 "============================== Set expandtab correctly =====================
 let _curfile = expand("%:t")
 if _curfile =~ "Makefile" || _curfile =~ "makefile" || _curfile =~ ".*\.mk"
@@ -128,7 +134,7 @@ colorscheme solarized
 "================================== Remap Esc Key ===========================
 imap jk <Esc>
 "============================= Set Clipboard to Sys Clipboard ===============
-set clipboard+=unnamedplus
+set clipboard=unnamed
 "============================= Fix Backspace ================================
 set backspace=2
 "=================================== Detect QML Syntax ======================
