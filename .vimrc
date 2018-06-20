@@ -113,7 +113,7 @@ au BufWritePost .nvimrc so ~/.nvimrc
 
 "==============================  leader shortcuts ===========================
 let mapleader = ","
-nnoremap <leader>n :NERDTree<enter>
+nnoremap <leader>n :NERDTreeTabsToggle<enter>
 nnoremap <leader>s <C-w>s
 nnoremap <leader>v <C-w>v
 nnoremap <leader>c <C-w>c
