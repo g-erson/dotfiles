@@ -1,0 +1,8 @@
+.config/QtProject/
+.config/configstore/
+.config/git/
+.config/gocode/
+.config/gtk-2.0/
+.config/nvim
+.config/nyaovim/
+.vim/bundle_backup/
