@@ -13,16 +13,29 @@ Plugin 'gmarik/vundle'
 " The following are examples of different formats supported.
 " Keep bundle commands between here and filetype plugin indent on.
 " scripts on GitHub repos
-Plugin 'Valloric/YouCompleteMe' "This is just the client. Install server
-                                "with ./<plugin location>/install.sh
-                                " --clang-completer
+if exists('g:gui_oni')
+    set noshowmode
+    set noruler
+    set laststatus=0
+    set noshowcmd
+else 
+    " Statements here
+    Plugin 'Valloric/YouCompleteMe' "This is just the client. Install server
+                                    "with ./<plugin location>/install.sh
+                                    " --clang-completer
+                                    "
+    Plugin 'jistr/vim-nerdtree-tabs'
+    "Configure ctrlp
+    set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+endif
+
 Plugin 'ap/vim-css-color'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-rails'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'airblade/vim-gitgutter'
 "Plugin 'scrooloose/syntastic'
 Plugin 'vim-ruby/vim-ruby'
@@ -42,8 +55,6 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " git repos on your local machine (i.e. when working on your own plugin)
 "Plugin 'file:///home/gmarik/path/to/plugin'
 " ...
-"Configure ctrlp
-set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 call vundle#end()
 filetype plugin indent on     " required
@@ -91,14 +102,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-" ======================== scrooloose/syntastic settings ====================
-let g:syntastic_error_symbol = '✘'
-let g:syntastic_warning_symbol = "▲"
-augroup mySyntastic
-  au!
-  au FileType tex let b:syntastic_mode = "passive"
-augroup END
-
 "================================ Turn Swap files off =======================
 set noswapfile
 set nobackup
