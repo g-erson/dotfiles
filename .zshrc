@@ -14,6 +14,8 @@ export EDITOR="/usr/local/bin/nvim"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="refined"
 
+bindkey "^P" up-line-or-search
+
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
 # cause zsh load theme from this variable instead of
