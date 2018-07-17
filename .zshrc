@@ -14,8 +14,6 @@ export EDITOR="/usr/local/bin/nvim"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="refined"
 
-bindkey "^P" up-line-or-search
-
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
 # cause zsh load theme from this variable instead of
@@ -94,6 +92,9 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+bindkey "^P" up-line-or-search
+setopt NO_NOMATCH
 
 # export MANPATH="/usr/local/man:$MANPATH"
 

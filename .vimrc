@@ -20,14 +20,15 @@ if exists('g:gui_oni')
     set noshowcmd
 else 
     " Statements here
-    Plugin 'Valloric/YouCompleteMe' "This is just the client. Install server
+"    Plugin 'Valloric/YouCompleteMe' "This is just the client. Install server
                                     "with ./<plugin location>/install.sh
                                     " --clang-completer
                                     "
     Plugin 'jistr/vim-nerdtree-tabs'
     "Configure ctrlp
     set runtimepath^=~/.vim/bundle/ctrlp.vim
-
+    Plugin 'vim-airline/vim-airline'
+    Plugin 'vim-airline/vim-airline-themes'
 endif
 
 Plugin 'ap/vim-css-color'
@@ -42,8 +43,6 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'peterhoeg/vim-qml'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'guns/vim-clojure-static'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'posva/vim-vue'
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
@@ -144,7 +143,7 @@ set clipboard=unnamed
 set backspace=2
 "=================================== Detect QML Syntax ======================
 au BufNewFile,BufRead *.qml set filetype=qml
-"============================ Airline Config =================================
+"============================ Airline Config ================================
 let g:airline_powerline_fonts = 1 "git clone git@github.com:powerline/fonts.git
                                   "./install.sh
 let g:airline_theme = 'durant'
@@ -152,3 +151,5 @@ if !exists('g:airline_symbols')
       let g:airline_symbols = {}
   endif
 let g:airline_symbols.space = "\ua0"
+"========================  Enter insert mode terminals ======================
+autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
