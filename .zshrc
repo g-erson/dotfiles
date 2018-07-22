@@ -5,7 +5,7 @@ autoload -U promptinit; promptinit
 prompt pure
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/George/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 export TERM="xterm-256color"
 export EDITOR="/usr/local/bin/nvim"
 
