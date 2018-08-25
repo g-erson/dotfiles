@@ -20,7 +20,7 @@ if exists('g:gui_oni')
     set noshowcmd
 else 
     " Statements here
-"    Plugin 'Valloric/YouCompleteMe' "This is just the client. Install server
+    Plugin 'Valloric/YouCompleteMe' "This is just the client. Install server
                                     "with ./<plugin location>/install.sh
                                     " --clang-completer
                                     "
@@ -29,6 +29,7 @@ else
     set runtimepath^=~/.vim/bundle/ctrlp.vim
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
+    Plugin 'ctrlpvim/ctrlp.vim'
 endif
 
 Plugin 'ap/vim-css-color'
@@ -42,6 +43,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'peterhoeg/vim-qml'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'purescript-contrib/purescript-vim'
 Plugin 'guns/vim-clojure-static'
 Plugin 'posva/vim-vue'
 

@@ -1,12 +1,12 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 zmodload zsh/zprof
-autoload -U promptinit; promptinit
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export TERM="xterm-256color"
 export EDITOR="/usr/local/bin/nvim"
+
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -63,38 +63,45 @@ ZSH_THEME="refined"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    brew 
+    colored-man 
+    colorize 
+    docker 
+    docker-compose
+    django 
     git 
     git-extras 
     git-flow 
-    colored-man 
-    colorize 
     github 
-    vagrant 
-    virtualenv 
+    node
+    npm 
+    node 
+    osx 
     pip 
     python 
-    brew 
-    osx 
-    zsh-syntax-highlighting 
-    npm 
-    docker 
-    django 
-    bower 
-    celery 
-    node 
-    sublime 
     sudo 
     supervisor 
+    tmux
+    vi-mode
+    vagrant 
+    virtualenv 
     web-search
+    zsh-syntax-highlighting 
 )
 
 source $ZSH/oh-my-zsh.sh
+
+fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
+autoload -U promptinit; promptinit
+prompt pure
 
 # User configuration
 
 bindkey "^P" up-line-or-search
 setopt NO_NOMATCH
 
+export PATH=$HOME/Android/Sdk/tools/bin:$PATH
+export PATH=$HOME/android-studio/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -121,3 +128,15 @@ setopt NO_NOMATCH
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+###-tns-completion-start-###
+if [ -f /home/george/.tnsrc ]; then 
+    source /home/george/.tnsrc 
+fi
+
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+export ANDROID_HOME="$HOME/Android/Sdk"
+export PATH="$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.npm-global/bin/:$PATH"
+###-tns-completion-end-###
