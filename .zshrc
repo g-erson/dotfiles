@@ -95,6 +95,10 @@ fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
 autoload -U promptinit; promptinit
 prompt pure
 
+compinit
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
+
 # User configuration
 
 bindkey "^P" up-line-or-search

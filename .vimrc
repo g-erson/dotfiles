@@ -44,6 +44,7 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'peterhoeg/vim-qml'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'purescript-contrib/purescript-vim'
+Plugin 'frigoeu/psc-ide-vim'
 Plugin 'guns/vim-clojure-static'
 Plugin 'posva/vim-vue'
 
