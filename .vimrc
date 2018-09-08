@@ -84,6 +84,9 @@ set shiftround
 "============================ Vue file fancy markup =========================
 let g:vue_disable_pre_processors = 1
 au BufNewFile,BufRead *.vue set filetype=vue
+"=========================== Purescript Markup ==============================
+au BufNewFile,BufRead *.psc set filetype=purescript
+au BufNewFile,BufRead *.purs set filetype=purescript
 "============================== Set expandtab correctly =====================
 let _curfile = expand("%:t")
 if _curfile =~ "Makefile" || _curfile =~ "makefile" || _curfile =~ ".*\.mk"
