@@ -87,6 +87,7 @@ plugins=(
     virtualenv 
     web-search
     zsh-syntax-highlighting 
+    zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -97,7 +98,7 @@ prompt pure
 
 compinit
 # Completion for kitty
-kitty + complete setup zsh | source /dev/stdin
+#kitty + complete setup zsh | source /dev/stdin
 
 # User configuration
 

@@ -29,8 +29,9 @@ exports.configuration = {
     "oni.useDefaultConfig": true,
     "oni.bookmarks": ["~/Documents"],
     "editor.textMateHighlighting.enabled" : true,
-    "editor.fontSize": "12px",
-    "editor.fontFamily": "Monaco",
+    "editor.fontSize": "15px",
+    //"editor.fontFamily": "Monaco",
+    "editor.fontFamily": "MonofurForPowerline",
     // UI customizations
     "ui.animations.enabled": true,
     "ui.fontSmoothing": "auto"

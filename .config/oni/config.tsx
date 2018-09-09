@@ -26,8 +26,8 @@ export const configuration = {
 
     "oni.useDefaultConfig": true,
     "oni.bookmarks": ["~/Documents"],
-    "editor.fontSize": "12px",
-    "editor.fontFamily": "Monaco",
+    "editor.fontSize": "14px",
+    "editor.fontFamily": "MonofurForPowerline",
 
     // UI customizations
     "ui.animations.enabled": true,
