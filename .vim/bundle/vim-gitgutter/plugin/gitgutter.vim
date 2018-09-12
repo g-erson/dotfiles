@@ -45,6 +45,7 @@ else
 endif
 
 call s:set('g:gitgutter_sign_modified_removed',    '~_')
+call s:set('g:gitgutter_git_args',                   '')
 call s:set('g:gitgutter_diff_args',                  '')
 call s:set('g:gitgutter_diff_base',                  '')
 call s:set('g:gitgutter_map_keys',                    1)
@@ -173,26 +174,10 @@ nnoremap <silent> <Plug>GitGutterPreviewHunk :GitGutterPreviewHunk<CR>
 
 " }}}
 
-function! s:flag_inactive_tabs()
-  let active_tab = tabpagenr()
-  for i in range(1, tabpagenr('$'))
-    if i != active_tab
-      call settabvar(i, 'gitgutter_force', 1)
-    endif
-  endfor
-endfunction
-
 function! s:on_bufenter()
   if exists('t:gitgutter_didtabenter') && t:gitgutter_didtabenter
     let t:gitgutter_didtabenter = 0
-    let force = !g:gitgutter_terminal_reports_focus
-
-    if exists('t:gitgutter_force') && t:gitgutter_force
-      let t:gitgutter_force = 0
-      let force = 1
-    endif
-
-    call gitgutter#all(force)
+    call gitgutter#all(!g:gitgutter_terminal_reports_focus)
   else
     call gitgutter#init_buffer(bufnr(''))
     call gitgutter#process_buffer(bufnr(''), !g:gitgutter_terminal_reports_focus)
@@ -208,15 +193,19 @@ augroup gitgutter
 
   autocmd BufEnter * call s:on_bufenter()
 
-  autocmd CursorHold,CursorHoldI            * call gitgutter#process_buffer(bufnr(''), 0)
-  autocmd FileChangedShellPost,ShellCmdPost * call gitgutter#process_buffer(bufnr(''), 1)
+  autocmd CursorHold,CursorHoldI * call gitgutter#process_buffer(bufnr(''), 0)
+  autocmd FileChangedShellPost   * call gitgutter#process_buffer(bufnr(''), 1)
 
   " Ensure that all buffers are processed when opening vim with multiple files, e.g.:
   "
   "   vim -o file1 file2
   autocmd VimEnter * if winnr() != winnr('$') | call gitgutter#all(0) | endif
 
-  autocmd FocusGained * call gitgutter#all(1) | call s:flag_inactive_tabs()
+  autocmd FocusGained,ShellCmdPost * call gitgutter#all(1)
+
+  if exists('##VimResume')
+    autocmd VimResume * call gitgutter#all(1)
+  endif
 
   autocmd ColorScheme * call gitgutter#highlight#define_sign_column_highlight() | call gitgutter#highlight#define_highlights()
 
