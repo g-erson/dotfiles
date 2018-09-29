@@ -27,6 +27,7 @@ exports.configuration = {
     "language.vue.languageServer.command":"vls",
     "experimental.indentLines.enabled": true,
     "oni.useDefaultConfig": true,
+    "tab.mode" : "tabs",
     "oni.bookmarks": ["~/Documents"],
     "editor.textMateHighlighting.enabled" : true,
     "editor.fontSize": "15px",

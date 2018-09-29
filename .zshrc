@@ -114,6 +114,8 @@ export PATH="$HOME/.local/kitty.app/bin:$PATH"
 
 bindkey "^P" up-line-or-search
 setopt NO_NOMATCH
+bindkey -v  # instead of set -o vi
+bindkey -e jk \\e
 
 export PATH=$HOME/Android/Sdk/tools/bin:$PATH
 export PATH=$HOME/android-studio/bin:$PATH
