@@ -92,7 +92,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
+fpath+=('/home/george/.npm-global/lib/node_modules/pure-prompt/functions')
 autoload -U promptinit; promptinit
 prompt pure
 
@@ -103,6 +103,7 @@ compinit
 # User configuration
 
 bindkey "^P" up-line-or-search
+bindkey jk vi-cmd-mode
 setopt NO_NOMATCH
 
 export PATH=$HOME/Android/Sdk/tools/bin:$PATH
@@ -133,6 +134,9 @@ export PATH=$HOME/android-studio/bin:$PATH
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias dc="docker-compose"
+alias d="docker"
+alias psc="psc-package"
 
 ###-tns-completion-start-###
 if [ -f /home/george/.tnsrc ]; then 
