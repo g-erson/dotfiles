@@ -82,9 +82,7 @@ plugins=(
     sudo 
     supervisor 
     tmux
-    vi-mode
     vagrant 
-    virtualenv 
     web-search
     zsh-syntax-highlighting 
     zsh-autosuggestions
@@ -96,6 +94,7 @@ fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
 fpath+=('/home/george/.npm-global/lib/node_modules/pure-prompt/functions')
 
 autoload -U promptinit; promptinit
+PURE_CMD_MAX_EXEC_TIME=10
 prompt pure
 
 compinit
@@ -115,7 +114,6 @@ export PATH="$HOME/.local/kitty.app/bin:$PATH"
 bindkey "^P" up-line-or-search
 bindkey jk vi-cmd-mode
 setopt NO_NOMATCH
-bindkey -v  # instead of set -o vi
 
 export PATH=$HOME/Android/Sdk/tools/bin:$PATH
 export PATH=$HOME/android-studio/bin:$PATH
