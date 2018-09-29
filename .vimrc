@@ -14,34 +14,28 @@ Plugin 'gmarik/vundle'
 " Keep bundle commands between here and filetype plugin indent on.
 " scripts on GitHub repos
 if exists('g:gui_oni')
-  set noshowmode
-  set noruler
-  set laststatus=0
-  set noshowcmd
+    set noshowmode
+    set noruler
+    set laststatus=0
+    set noshowcmd
 else 
-  " Statements here
-  Plugin 'Valloric/YouCompleteMe' "This is just the client. Install server
-                                  "with ./<plugin location>/install.sh
-                                  " --clang-completer
-                                  "
-  Plugin 'jistr/vim-nerdtree-tabs'
-  "Configure ctrlp
-  "" Ignore some folders and files for CtrlP indexing
-  let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|vendor\|log\|tmp$',
-  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
-  \ }
-  set runtimepath^=~/.vim/bundle/ctrlp.vim
-  Plugin 'vim-airline/vim-airline'
-  Plugin 'vim-airline/vim-airline-themes'
-  Plugin 'ctrlpvim/ctrlp.vim'
+    " Statements here
+    Plugin 'Valloric/YouCompleteMe' "This is just the client. Install server
+                                    "with ./<plugin location>/install.sh
+                                    " --clang-completer
+                                    "
+    Plugin 'jistr/vim-nerdtree-tabs'
+    "Configure ctrlp
+    set runtimepath^=~/.vim/bundle/ctrlp.vim
+    Plugin 'vim-airline/vim-airline'
+    Plugin 'vim-airline/vim-airline-themes'
+    Plugin 'ctrlpvim/ctrlp.vim'
 endif
 
 Plugin 'ap/vim-css-color'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-surround'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
@@ -99,9 +93,9 @@ if _curfile =~ "Makefile" || _curfile =~ "makefile" || _curfile =~ ".*\.mk"
     set noexpandtab
 else
     set expandtab
-    set tabstop=2
-    set shiftwidth=2
-    set softtabstop=2
+    set tabstop=4
+    set shiftwidth=4
+    set softtabstop=4
 endif
 
 "===================== Reselect visual block after indent/outdent ===========
