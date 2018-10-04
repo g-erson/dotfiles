@@ -24,7 +24,9 @@ exports.deactivate = function (oni) {
 exports.configuration = {
     //add custom config here, such as
     "ui.colorscheme": "hybrid",
+    //language servers
     "language.vue.languageServer.command":"vls",
+    "experimental.vcs.sidebar": true,
     "experimental.indentLines.enabled": true,
     "oni.useDefaultConfig": true,
     "tab.mode" : "tabs",
