@@ -144,6 +144,7 @@ export PATH=$HOME/android-studio/bin:$PATH
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias dc="docker-compose"
+alias dce="docker-compose exec" 
 alias d="docker"
 alias psc="psc-package"
 
