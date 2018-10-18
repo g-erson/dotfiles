@@ -29,7 +29,7 @@ exports.configuration = {
     "experimental.vcs.sidebar": true,
     "experimental.indentLines.enabled": true,
     "oni.useDefaultConfig": true,
-    "tab.mode" : "tabs",
+    "tabs.mode" : "buffer",
     "oni.bookmarks": ["~/Documents"],
     "editor.textMateHighlighting.enabled" : true,
     "editor.fontSize": "15px",

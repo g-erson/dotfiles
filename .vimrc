@@ -52,6 +52,8 @@ Plugin 'peterhoeg/vim-qml'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'purescript-contrib/purescript-vim'
 Plugin 'frigoeu/psc-ide-vim'
+Plugin 'toyamarinyon/vim-swift'
+Plugin 'lumiliet/vim-twig'
 Plugin 'guns/vim-clojure-static'
 Plugin 'posva/vim-vue'
 
@@ -88,12 +90,16 @@ syn on!
 set autoindent
 set smartindent
 set shiftround
-"============================ Vue file fancy markup =========================
+"============================ Vue Markup ====================================
 let g:vue_disable_pre_processors = 1
 au BufNewFile,BufRead *.vue set filetype=vue
 "=========================== Purescript Markup ==============================
 au BufNewFile,BufRead *.psc set filetype=purescript
 au BufNewFile,BufRead *.purs set filetype=purescript
+"=========================== QML Markup =====================================
+au BufNewFile,BufRead *.qml set filetype=qml
+"=========================== Swift Markup ===================================
+au BufNewFile,BufRead *.swift set filetype=swift
 "============================== Set expandtab correctly =====================
 let _curfile = expand("%:t")
 if _curfile =~ "Makefile" || _curfile =~ "makefile" || _curfile =~ ".*\.mk"
@@ -154,8 +160,6 @@ imap jk <Esc>
 set clipboard=unnamed
 "============================= Fix Backspace ================================
 set backspace=2
-"=================================== Detect QML Syntax ======================
-au BufNewFile,BufRead *.qml set filetype=qml
 "============================ Airline Config ================================
 let g:airline_powerline_fonts = 1 "git clone git@github.com:powerline/fonts.git
                                   "./install.sh

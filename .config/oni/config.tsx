@@ -5,16 +5,18 @@ import * as Oni from "oni-api"
 export const activate = (oni: Oni.Plugin.Api) => {
     console.log("config activated")
 
-    // Input
-    //
-    // Add input bindings here:
-    //
-    oni.input.bind("<c-enter>", () => console.log("Control+Enter was pressed"))
-
-    //
-    // Or remove the default bindings here by uncommenting the below line:
-    //
-    // oni.input.unbind("<c-p>")
+    oni.input.bind("<C-h>", () =>
+        oni.editors.activeEditor.neovim.command(`call OniNextWindow('h')<CR>`)
+    )
+    oni.input.bind("<C-j>", () =>
+        oni.editors.activeEditor.neovim.command(`call OniNextWindow('j')<CR>`)
+    )
+    oni.input.bind("<C-k>", () =>
+        oni.editors.activeEditor.neovim.command(`call OniNextWindow('k')<CR>`)
+    )
+    oni.input.bind("<C-l>", () =>
+        oni.editors.activeEditor.neovim.command(`call OniNextWindow('l')<CR>`)
+    )
 }
 
 export const deactivate = (oni: Oni.Plugin.Api) => {
@@ -23,13 +25,19 @@ export const deactivate = (oni: Oni.Plugin.Api) => {
 
 export const configuration = {
     //add custom config here, such as
-
+    "ui.colorscheme": "hybrid",
+    //language servers
+    "language.vue.languageServer.command":"vls",
+    "experimental.vcs.sidebar": true,
+    "experimental.indentLines.enabled": true,
     "oni.useDefaultConfig": true,
+    "tabs.mode" : "buffer",
     "oni.bookmarks": ["~/Documents"],
-    "editor.fontSize": "14px",
-    "editor.fontFamily": "MonofurForPowerline",
-
+    "editor.textMateHighlighting.enabled" : true,
+    "editor.fontSize": "15px",
+    //"editor.fontFamily": "Monaco",
+    "editor.fontFamily": "Monofur for Powerline",
     // UI customizations
     "ui.animations.enabled": true,
-    "ui.fontSmoothing": "auto",
+    "ui.fontSmoothing": "auto"
 }
