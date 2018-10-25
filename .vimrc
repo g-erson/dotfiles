@@ -51,6 +51,7 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'peterhoeg/vim-qml'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'purescript-contrib/purescript-vim'
+Plugin 'neovimhaskell/haskell-vim',
 Plugin 'frigoeu/psc-ide-vim'
 Plugin 'toyamarinyon/vim-swift'
 Plugin 'lumiliet/vim-twig'
