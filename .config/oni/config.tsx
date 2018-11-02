@@ -28,10 +28,16 @@ export const configuration = {
     "ui.colorscheme": "hybrid",
     //language servers
     "language.vue.languageServer.command":"vls",
+    "language.haskell.languageServer.command": "hi",
+    "language.haskell.languageServer.arguments": ["--lsp"],
+    "language.haskell.languageServer.rootFiles": [".git"],
+
     "experimental.vcs.sidebar": true,
     "experimental.indentLines.enabled": true,
+    "experimental.markdownPreview.enabled": true,
     "oni.useDefaultConfig": true,
-    "tabs.mode" : "buffer",
+//    "tabs.mode" : "buffer", // one day...
+    "tabs.mode" : "tabs",
     "oni.bookmarks": ["~/Documents"],
     "editor.textMateHighlighting.enabled" : true,
     "editor.fontSize": "15px",
@@ -40,4 +46,8 @@ export const configuration = {
     // UI customizations
     "ui.animations.enabled": true,
     "ui.fontSmoothing": "auto"
+    "vim.setting.number": false,
+    "vim.setting.tabstop": 2,
+    "vim.setting.softtabstop": 2,
+    "vim.setting.shiftwidth": 2,
 }
