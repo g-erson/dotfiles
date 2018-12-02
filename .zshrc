@@ -73,6 +73,7 @@ plugins=(
     git-extras 
     git-flow 
     github 
+    nix-shell
     node
     npm 
     node 
