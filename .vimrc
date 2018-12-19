@@ -66,7 +66,10 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-surround'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'purescript-contrib/purescript-vim'
+Plugin 'neovimhaskell/haskell-vim',
 Plugin 'frigoeu/psc-ide-vim'
+Plugin 'toyamarinyon/vim-swift'
+Plugin 'lumiliet/vim-twig'
 Plugin 'posva/vim-vue'
 
 
@@ -106,12 +109,16 @@ syn on!
 set autoindent
 set smartindent
 set shiftround
-"============================ Vue file fancy markup =========================
+"============================ Vue Markup ====================================
 let g:vue_disable_pre_processors = 1
 au BufNewFile,BufRead *.vue set filetype=vue
 "=========================== Purescript Markup ==============================
 au BufNewFile,BufRead *.psc set filetype=purescript
 au BufNewFile,BufRead *.purs set filetype=purescript
+"=========================== QML Markup =====================================
+au BufNewFile,BufRead *.qml set filetype=qml
+"=========================== Swift Markup ===================================
+au BufNewFile,BufRead *.swift set filetype=swift
 "============================== Set expandtab correctly =====================
 let _curfile = expand("%:t")
 if _curfile =~ "Makefile" || _curfile =~ "makefile" || _curfile =~ ".*\.mk"

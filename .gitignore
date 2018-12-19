@@ -6,5 +6,5 @@
 .config/nvim
 .config/nyaovim/
 .vim/bundle_backup/
-.vim/bundle/YouCompleteMe
-.vim/bundle/vim-clojure-static
+.vim/bundle
+.vim/bundle

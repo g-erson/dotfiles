@@ -73,6 +73,7 @@ plugins=(
     git-extras 
     git-flow 
     github 
+    nix-shell
     node
     npm 
     node 
@@ -144,8 +145,14 @@ export PATH=$HOME/android-studio/bin:$PATH
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias dc="docker-compose"
+alias dce="docker-compose exec" 
 alias d="docker"
 alias psc="psc-package"
+alias fre="find . -regex"
+
+#coherent stuff
+alias kkdb="ssh -L 3307:kkaurora2-cluster.cluster-cle6oc6mm8bd.eu-west-1.rds.amazonaws.com:3306 root@52.30.108.144"
+alias goto="ssh george@stuff"
 
 ###-tns-completion-start-###
 if [ -f /home/george/.tnsrc ]; then 
@@ -153,3 +160,9 @@ if [ -f /home/george/.tnsrc ]; then
 fi
 
 ###-tns-completion-end-###
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/george/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/george/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/george/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/george/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
