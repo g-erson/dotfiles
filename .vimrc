@@ -56,6 +56,7 @@ else
 
 endif
 
+Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'ap/vim-css-color'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-fireplace'
