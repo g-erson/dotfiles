@@ -19,23 +19,41 @@ if exists('g:gui_oni')
   set laststatus=0
   set noshowcmd
 else 
-  " Statements here
-  Plugin 'Valloric/YouCompleteMe' "This is just the client. Install server
-                                  "with ./<plugin location>/install.sh
-                                  " --clang-completer
-                                  "
-  Plugin 'jistr/vim-nerdtree-tabs'
   set runtimepath^=~/.vim/bundle/ctrlp.vim
 
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
   Plugin 'ctrlpvim/ctrlp.vim'
 
-  "" Ignore some folders and files for CtrlP indexing
+  " Ignore some folders and files for CtrlP indexing
   let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.yardoc\|node_modules\|vendor\|log\|tmp$',
   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
+
+  " Only use deoplete on the terminal 
+  let g:deoplete#enable_at_startup = 1
+
+  Plugin 'othree/yajs'
+  Plugin 'pangloss/vim-javascript'
+  Plugin 'jelera/vim-javascript-syntax'
+  Plugin 'maxmellon/vim-jsx-pretty'
+
+  " Async autocompletion
+  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " Completion from other opened files
+  Plugin 'Shougo/context_filetype.vim'
+  " Python autocompletion
+  Plugin 'zchee/deoplete-jedi', { 'do': ':UpdateRemotePlugins' }
+  Plugin 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
+
+  let g:LanguageClient_serverCommands = {
+    \ 'python': ['pyls']
+    \ }
+
 endif
 
 Plugin 'ap/vim-css-color'
@@ -46,14 +64,14 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-surround'
-"Plugin 'scrooloose/syntastic'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'peterhoeg/vim-qml'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'purescript-contrib/purescript-vim'
 Plugin 'frigoeu/psc-ide-vim'
-Plugin 'guns/vim-clojure-static'
 Plugin 'posva/vim-vue'
+
+
+" Automatically close parenthesis, etc
+Plugin 'Townk/vim-autoclose'
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
@@ -129,11 +147,12 @@ au BufWritePost .nvimrc so ~/.nvimrc
 
 "==============================  leader shortcuts ===========================
 let mapleader = ","
-nnoremap <leader>n :NERDTreeTabsToggle<enter>
+nnoremap <leader>n :NERDTree<enter>
 nnoremap <leader>s <C-w>s
 nnoremap <leader>v <C-w>v
 nnoremap <leader>c <C-w>c
 nnoremap <leader>q <C-w>q
+nnoremap <leader>t :tabnew<enter>
 nnoremap <leader>T <C-w>T:NERDTree<enter>
 
 "============================ Use Tab for auto completion ===================
@@ -154,8 +173,6 @@ imap jk <Esc>
 set clipboard=unnamed
 "============================= Fix Backspace ================================
 set backspace=2
-"=================================== Detect QML Syntax ======================
-au BufNewFile,BufRead *.qml set filetype=qml
 "============================ Airline Config ================================
 let g:airline_powerline_fonts = 1 "git clone git@github.com:powerline/fonts.git
                                   "./install.sh
