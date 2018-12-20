@@ -153,6 +153,7 @@ alias fre="find . -regex"
 #coherent stuff
 alias kkdb="ssh -L 3307:kkaurora2-cluster.cluster-cle6oc6mm8bd.eu-west-1.rds.amazonaws.com:3306 root@52.30.108.144"
 alias goto="ssh george@stuff"
+alias tmux="env TERM=xterm-256color tmux"
 
 ###-tns-completion-start-###
 if [ -f /home/george/.tnsrc ]; then 

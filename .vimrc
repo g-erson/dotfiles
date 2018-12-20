@@ -61,7 +61,7 @@ Plugin 'ap/vim-css-color'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-rails'
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'joshdick/onedark.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-surround'
@@ -100,7 +100,10 @@ filetype plugin indent on     " required
 " NOTE: comments after Bundle commands are not allowed.
 "
 "=========================== Set 24 bit colour ==============================
-let NVIM_TUI_ENABLE_TRUE_COLOR=1
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+if (has("termguicolors"))
+  set termguicolors
+endif
 "============================== Sets Line Numbering on ======================
 set nu
 set relativenumber
@@ -174,7 +177,8 @@ endfunction
 imap <Tab> <C-R>=SuperTab()<CR>
 "=================================== Colourscheme ===========================
 set background=dark
-colorscheme solarized
+let g:onedark_terminal_italics=1
+colorscheme onedark
 "================================== Remap Esc Key ===========================
 imap jk <Esc>
 "============================= Set Clipboard to Sys Clipboard ===============
@@ -184,7 +188,7 @@ set backspace=2
 "============================ Airline Config ================================
 let g:airline_powerline_fonts = 1 "git clone git@github.com:powerline/fonts.git
                                   "./install.sh
-let g:airline_theme = 'durant'
+let g:airline_theme='onedark'
 if !exists('g:airline_symbols')
       let g:airline_symbols = {}
   endif
