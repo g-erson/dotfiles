@@ -75,7 +75,7 @@ Plugin 'posva/vim-vue'
 
 
 " Automatically close parenthesis, etc
-Plugin 'Townk/vim-autoclose'
+"Plugin 'Townk/vim-autoclose'
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
