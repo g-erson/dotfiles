@@ -40,19 +40,25 @@ else
   Plugin 'maxmellon/vim-jsx-pretty'
 
   " Async autocompletion
-  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plugin 'Shougo/deoplete.nvim',
   " Completion from other opened files
   Plugin 'Shougo/context_filetype.vim'
   " Python autocompletion
-  Plugin 'zchee/deoplete-jedi', { 'do': ':UpdateRemotePlugins' }
+  Plugin 'zchee/deoplete-jedi',
   Plugin 'autozimu/LanguageClient-neovim', {
       \ 'branch': 'next',
       \ 'do': 'bash install.sh',
       \ }
 
   let g:LanguageClient_serverCommands = {
-    \ 'python': ['pyls']
+    \ 'python': ['pyls'],
+    \ 'haskell' : ['hie','--lsp']
     \ }
+
+  " Set language server bindings
+  nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+  nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+  nnoremap <silent> <leader>r :call LanguageClient#textDocument_rename()<CR>
 
 endif
 
