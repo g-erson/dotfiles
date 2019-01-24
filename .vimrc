@@ -13,8 +13,8 @@ if exists('g:gui_oni')
 else 
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'ctrlpvim/ctrlp.vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
 
   " Only use deoplete on the terminal 
   let g:deoplete#enable_at_startup = 1
@@ -111,6 +111,16 @@ endif
 "===================== Reselect visual block after indent/outdent ===========
 vnoremap < <gv
 vnoremap > >gv
+
+"============================= FZF bindings =================================
+nnoremap <C-p> :FZF<CR>
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 "=========================== Easy split window navigation ===================
 nnoremap <C-h> <C-w>h
