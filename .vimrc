@@ -1,14 +1,6 @@
-filetype plugin indent on
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install bundles
-"let path = '~/some/path/here'
-"call vundle#rc(path)
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/vundle'
+call plug#begin('~/.vim/plugged')
 
 " The following are examples of different formats supported.
 " Keep bundle commands between here and filetype plugin indent on.
@@ -19,91 +11,67 @@ if exists('g:gui_oni')
   set laststatus=0
   set noshowcmd
 else 
-  set runtimepath^=~/.vim/bundle/ctrlp.vim
-
-  Plugin 'vim-airline/vim-airline'
-  Plugin 'vim-airline/vim-airline-themes'
-  Plugin 'ctrlpvim/ctrlp.vim'
-
-  " Ignore some folders and files for CtrlP indexing
-  let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|vendor\|log\|tmp$',
-  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
-  \ }
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
   " Only use deoplete on the terminal 
   let g:deoplete#enable_at_startup = 1
 
-  Plugin 'othree/yajs'
-  Plugin 'pangloss/vim-javascript'
-  Plugin 'jelera/vim-javascript-syntax'
-  Plugin 'maxmellon/vim-jsx-pretty'
+  Plug 'pangloss/vim-javascript'
+  Plug 'maxmellon/vim-jsx-pretty'
 
   " Async autocompletion
-  Plugin 'Shougo/deoplete.nvim',
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   " Completion from other opened files
-  Plugin 'Shougo/context_filetype.vim'
+  Plug 'Shougo/context_filetype.vim'
   " Python autocompletion
-  Plugin 'zchee/deoplete-jedi',
-  Plugin 'autozimu/LanguageClient-neovim', {
+  Plug 'zchee/deoplete-jedi',
+  Plug 'autozimu/LanguageClient-neovim', {
       \ 'branch': 'next',
       \ 'do': 'bash install.sh',
       \ }
 
+  " Automatically start language servers.
+  let g:LanguageClient_autoStart = 1
+  let g:LanguageClient_rootMarkers = ['default.nix','package-lib.yaml','*.cabal', 'stack.yaml']
   let g:LanguageClient_serverCommands = {
-    \ 'python': ['pyls'],
-    \ 'haskell' : ['hie','--lsp']
+    \ 'javascript' : ['node','~/.npm-global/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio','-l','/tmp/jsls.log'],
+    \ 'python': ['pyls','--log-file','/tmp/pyls.log'],
+    \ 'haskell' : ['hie-wrapper','--lsp','-l','/tmp/hie.log'],
+    \ 'vue' : ['vls']
     \ }
 
-  " Set language server bindings
-  nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-  nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-  nnoremap <silent> <leader>r :call LanguageClient#textDocument_rename()<CR>
+
+  let g:LanguageClient_loggingLevel = 'DEBUG' " Use highest logging level
+
+  if has('mouse')
+    set mouse=a
+  endif
 
 endif
 
-Plugin 'jeetsukumaran/vim-buffergator'
-Plugin 'ap/vim-css-color'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-fireplace'
-Plugin 'tpope/vim-rails'
-Plugin 'joshdick/onedark.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-surround'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'purescript-contrib/purescript-vim'
-Plugin 'neovimhaskell/haskell-vim',
-Plugin 'frigoeu/psc-ide-vim'
-Plugin 'toyamarinyon/vim-swift'
-Plugin 'lumiliet/vim-twig'
-Plugin 'posva/vim-vue'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'ap/vim-css-color'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'joshdick/onedark.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'purescript-contrib/purescript-vim'
+Plug 'neovimhaskell/haskell-vim',
+Plug 'frigoeu/psc-ide-vim'
+Plug 'toyamarinyon/vim-swift'
+Plug 'lumiliet/vim-twig'
+Plug 'posva/vim-vue'
 
+call plug#end()
 
-" Automatically close parenthesis, etc
-"Plugin 'Townk/vim-autoclose'
-
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" scripts from http://vim-scripts.org/vim/scripts.html
-" scripts not on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" ...
-
-call vundle#end()
-filetype plugin indent on     " required
-"
-" Brief help
-" :PluginList          - list configured bundles
-" :PluginInstall(!)    - install (update) bundles
-" :PluginSearch(!) foo - search (or refresh cache first) for foo
-" :PluginClean(!)      - confirm (or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle commands are not allowed.
 "
 "=========================== Set 24 bit colour ==============================
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -170,7 +138,22 @@ nnoremap <leader>v <C-w>v
 nnoremap <leader>c <C-w>c
 nnoremap <leader>q <C-w>q
 nnoremap <leader>t :tabnew<enter>
+nnoremap <leader>w :w<enter>
+nnoremap <leader>l :BuffergatorMruCycleNext<CR>
+nnoremap <leader>h :BuffergatorMruCyclePrev<CR>
+nnoremap <leader>gp <Plug>GitGutterPreviewHunk
+nnoremap <leader>gu <Plug>GitGutterUndoHunk
+nnoremap <leader>gs <Plug>GitGutterStageHunk
 nnoremap <leader>T <C-w>T:NERDTree<enter>
+nnoremap <silent> <leader>gd :Gdiff :0<enter>
+nnoremap <silent> <leader>gw :Gw <enter>
+nnoremap <silent> <leader>gst :Gst <enter>
+
+" Set language server bindings
+nnoremap <silent> <leader>j :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> <leader>d :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <leader>r :call LanguageClient#textDocument_rename()<CR>
+nnoremap <silent> <leader>a :call LanguageClient#textDocument_codeAction()<CR>
 
 "============================ Use Tab for auto completion ===================
 function! SuperTab()
@@ -192,6 +175,7 @@ set clipboard=unnamed
 "============================= Fix Backspace ================================
 set backspace=2
 "============================ Airline Config ================================
+let g:airline#extensions#whitespace#enabled = 0
 let g:airline_powerline_fonts = 1 "git clone git@github.com:powerline/fonts.git
                                   "./install.sh
 let g:airline_theme='onedark'
