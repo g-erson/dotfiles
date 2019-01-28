@@ -1,11 +1,8 @@
 
-" set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
 
-" The following are examples of different formats supported.
-" Keep bundle commands between here and filetype plugin indent on.
-" scripts on GitHub repos
 if exists('g:gui_oni')
+  " Onivim does all the below stuff itself, best leave it alone
   set noshowmode
   set noruler
   set laststatus=0
@@ -13,6 +10,11 @@ if exists('g:gui_oni')
 else 
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+
+  Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
@@ -28,10 +30,6 @@ else
   Plug 'Shougo/context_filetype.vim'
   " Python autocompletion
   Plug 'zchee/deoplete-jedi',
-  Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
 
   " Automatically start language servers.
   let g:LanguageClient_autoStart = 1
@@ -39,7 +37,7 @@ else
   let g:LanguageClient_serverCommands = {
     \ 'javascript' : ['node','~/.npm-global/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio','-l','/tmp/jsls.log'],
     \ 'python': ['pyls','--log-file','/tmp/pyls.log'],
-    \ 'haskell' : ['hie-wrapper','--lsp','-l','/tmp/hie.log'],
+    \ 'haskell' : ['hie-wrapper','--debug', '--vomit','--lsp','-l','/tmp/hie.log'],
     \ 'vue' : ['vls']
     \ }
 
@@ -72,18 +70,19 @@ Plug 'posva/vim-vue'
 
 call plug#end()
 
-"
 "=========================== Set 24 bit colour ==============================
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 if (has("termguicolors"))
   set termguicolors
 endif
-"============================== Sets Line Numbering on ======================
+"=========================== Sets Line Numbering on =========================
 set nu
 set relativenumber
-"============================== Sets colour syntax on =======================
+"============================ Sets colour syntax on =========================
 syn on!
-"============================ Sets indentation correctly ====================
+"============================== Sets cursor line ============================
+set cursorline
+"======================== Sets indentation correctly ========================
 set autoindent
 set smartindent
 set shiftround
@@ -114,6 +113,7 @@ vnoremap > >gv
 
 "============================= FZF bindings =================================
 nnoremap <C-p> :FZF<CR>
+nnoremap <C-f> :Ag<CR>
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
@@ -164,6 +164,7 @@ nnoremap <silent> <leader>j :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> <leader>d :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <leader>r :call LanguageClient#textDocument_rename()<CR>
 nnoremap <silent> <leader>a :call LanguageClient#textDocument_codeAction()<CR>
+nnoremap <silent> <leader>e :call LanguageClient#explainErrorAtPoint()<CR>
 
 "============================ Use Tab for auto completion ===================
 function! SuperTab()
