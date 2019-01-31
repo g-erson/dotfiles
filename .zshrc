@@ -106,6 +106,7 @@ export PATH="$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH"
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export PATH="$HOME/.npm-global/bin/:$PATH"
 export PATH="$HOME/.local/kitty.app/bin:$PATH"
+export PATH="$HOME/.cabal/bin:$PATH"
 
 # Completion for kitty
 #kitty + complete setup zsh | source /dev/stdin

@@ -75,6 +75,8 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 if (has("termguicolors"))
   set termguicolors
 endif
+"============================= Set Clipboard to Sys Clipboard ===============
+set clipboard=unnamedplus
 "=========================== Sets Line Numbering on =========================
 set nu
 set relativenumber
@@ -114,6 +116,7 @@ vnoremap > >gv
 "============================= FZF bindings =================================
 nnoremap <C-p> :FZF<CR>
 nnoremap <C-f> :Ag<CR>
+let g:fzf_buffers_jump = 1
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
@@ -181,8 +184,6 @@ let g:onedark_terminal_italics=1
 colorscheme onedark
 "================================== Remap Esc Key ===========================
 imap jk <Esc>
-"============================= Set Clipboard to Sys Clipboard ===============
-set clipboard=unnamed
 "============================= Fix Backspace ================================
 set backspace=2
 "============================ Airline Config ================================
