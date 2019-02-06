@@ -115,6 +115,7 @@ vnoremap > >gv
 vnoremap : :s/\%V
 
 "============================= FZF bindings =================================
+let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 nnoremap <C-p> :FZF<CR>
 nnoremap <C-f> :Ag<CR>
 let g:fzf_buffers_jump = 1
