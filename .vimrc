@@ -109,9 +109,10 @@ else
     set softtabstop=2
 endif
 
-"===================== Reselect visual block after indent/outdent ===========
+"===================== Visual mode remappings ===============================
 vnoremap < <gv
 vnoremap > >gv
+vnoremap : :s/\%V
 
 "============================= FZF bindings =================================
 nnoremap <C-p> :FZF<CR>
