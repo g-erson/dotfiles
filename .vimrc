@@ -38,7 +38,7 @@ else
     \ 'javascript' : ['node','~/.npm-global/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio','-l','/tmp/jsls.log'],
     \ 'python': ['pyls','--log-file','/tmp/pyls.log'],
     \ 'haskell' : ['hie-wrapper','--debug', '--vomit','--lsp','-l','/tmp/hie.log'],
-    \ 'vue' : ['vls']
+    \ 'vue' : ['vls','--stdio']
     \ }
 
 
