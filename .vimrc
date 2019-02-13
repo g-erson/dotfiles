@@ -38,7 +38,7 @@ else
     \ 'javascript' : ['node','~/.npm-global/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio','-l','/tmp/jsls.log'],
     \ 'python': ['pyls','--log-file','/tmp/pyls.log'],
     \ 'haskell' : ['hie-wrapper','--debug', '--vomit','--lsp','-l','/tmp/hie.log'],
-    \ 'vue' : ['vls']
+    \ 'vue' : ['vls','--stdio']
     \ }
 
 
@@ -115,6 +115,7 @@ vnoremap > >gv
 vnoremap : :s/\%V
 
 "============================= FZF bindings =================================
+let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 nnoremap <C-p> :FZF<CR>
 nnoremap <C-f> :Ag<CR>
 let g:fzf_buffers_jump = 1

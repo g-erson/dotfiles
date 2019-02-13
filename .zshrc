@@ -149,6 +149,7 @@ alias dc="docker-compose"
 alias dce="docker-compose exec" 
 alias d="docker"
 alias psc="psc-package"
+alias untar="tar -zvf"
 alias fre="find . -regex"
 
 #coherent stuff
