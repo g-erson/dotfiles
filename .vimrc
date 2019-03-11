@@ -33,13 +33,13 @@ else
 
   " Automatically start language servers.
   let g:LanguageClient_autoStart = 1
- let g:LanguageClient_rootMarkers = [
- \ '.git'
- \ 'default.nix',
- \ 'package-lib.yaml',
- \ '*.cabal',
- \ 'stack.yaml',
- \ ]
+"let g:LanguageClient_rootMarkers = [
+"\ '.git'
+"\ 'default.nix',
+"\ 'package-lib.yaml',
+"\ '*.cabal',
+"\ 'stack.yaml',
+"\ ]
   let g:LanguageClient_serverCommands = {
     \ 'javascript' : ['node','~/.npm-global/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio','-l','/tmp/jsls.log'],
     \ 'python': ['pyls','--log-file','/tmp/pyls.log'],
