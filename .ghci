@@ -1,4 +1,5 @@
 :set prompt "\ESC[1;34m%s\n\ESC[0;34mλ> \ESC[m"
+:set prompt2 " | "
 :def hoogle \s -> return $ ":! hoogle --count=15 \"" ++ s ++ "\""
 :set +m
 
