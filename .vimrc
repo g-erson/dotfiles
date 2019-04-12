@@ -61,8 +61,6 @@ endif
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-fireplace'
-Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'joshdick/onedark.vim'
