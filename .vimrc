@@ -29,7 +29,14 @@ else
   " Completion from other opened files
   Plug 'Shougo/context_filetype.vim'
   " Python autocompletion
-  Plug 'zchee/deoplete-jedi',
+  Plug 'zchee/deoplete-jedi'
+
+  "Clever autocompletion
+  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+  " Table mode
+  Plug 'dhruvasagar/vim-table-mode'
+  let g:table_mode_corner_corner='+'
+  let g:table_mode_header_fillchar='='
 
   " Automatically start language servers.
   let g:LanguageClient_autoStart = 1
@@ -73,6 +80,7 @@ Plug 'frigoeu/psc-ide-vim'
 Plug 'toyamarinyon/vim-swift'
 Plug 'lumiliet/vim-twig'
 Plug 'posva/vim-vue'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 call plug#end()
 
@@ -94,6 +102,14 @@ set cursorline
 set autoindent
 set smartindent
 set shiftround
+"=============== Don't forget history when changing buffers =================
+set hidden
+"  or ever...
+set undofile
+set undodir=$HOME/.vim/undo
+
+set undolevels=1000
+set undoreload=10000
 "============================ Vue Markup ====================================
 let g:vue_disable_pre_processors = 1
 au BufNewFile,BufRead *.vue set filetype=vue
@@ -121,6 +137,7 @@ vnoremap > >gv
 vnoremap : :s/\%V
 
 "============================= FZF bindings =================================
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-p> :FZF<CR>
@@ -154,7 +171,7 @@ au BufWritePost .nvimrc so ~/.nvimrc
 
 "==============================  leader shortcuts ===========================
 let mapleader = ","
-nnoremap <leader>n :NERDTree<enter>
+nnoremap <leader>n :NERDTreeToggle<enter>
 nnoremap <leader>s <C-w>s
 nnoremap <leader>v <C-w>v
 nnoremap <leader>c <C-w>c

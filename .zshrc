@@ -64,7 +64,7 @@ ZSH_THEME="refined"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     brew 
-    colored-man 
+    colored-man-pages
     colorize 
     docker 
     docker-compose
@@ -171,3 +171,4 @@ if [ -f '/home/george/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/
 if [ -f '/home/george/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/george/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /home/george/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

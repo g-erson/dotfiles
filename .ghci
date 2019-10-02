@@ -2,4 +2,6 @@
 :set prompt2 " | "
 :def hoogle \s -> return $ ":! hoogle --count=15 \"" ++ s ++ "\""
 :set +m
+:set -XRankNTypes
+:set -XOverloadedStrings
 
