@@ -66,6 +66,10 @@ set completeopt=menu,menuone,noselect
 
 "=========================== Visual Search Text =============================
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+"================= Decrease time waiting between keypresses  ================
+set timeoutlen=800 
+"=========================== Oops forgot sudo ===============================
+cmap w!! w !sudo tee > /dev/null %
 "=========================== Set 24 bit colour ==============================
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 if (has("termguicolors"))
@@ -168,18 +172,12 @@ nnoremap <leader>l :BuffergatorMruCycleNext<CR>
 nnoremap <leader>h :BuffergatorMruCyclePrev<CR>
 nnoremap <leader>gp <Plug>GitGutterPreviewHunk
 nnoremap <leader>gu <Plug>GitGutterUndoHunk
-nnoremap <leader>gs <Plug>GitGutterStageHunk
+"nnoremap <leader>gs <Plug>GitGutterStageHunk
 nnoremap <leader>T <C-w>T:NERDTree<enter>
-nnoremap <silent> <leader>gd :Gdiff :0<enter>
+nnoremap <silent> <leader>gd :Git diff :0<enter>
+nnoremap <silent> <leader>gb :Git blame <enter>
 nnoremap <silent> <leader>gw :Gw <enter>
-nnoremap <silent> <leader>gst :Gst <enter>
-
-" Set language server bindings
-"nnoremap <silent> <leader>j :call LanguageClient#textDocument_hover()<CR>
-"nnoremap <silent> <leader>d :call LanguageClient#textDocument_definition()<CR>
-"nnoremap <silent> <leader>r :call LanguageClient#textDocument_rename()<CR>
-"nnoremap <silent> <leader>a :call LanguageClient#textDocument_codeAction()<CR>
-"nnoremap <silent> <leader>e :call LanguageClient#explainErrorAtPoint()<CR>
+nnoremap <silent> <leader>gs :Git <enter>
 
 "================================= LSP ==================================
 lua <<EOF
@@ -198,6 +196,7 @@ lua <<EOF
       end,
     },
     mapping = {
+      ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'}),
       ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
@@ -254,7 +253,7 @@ lua <<EOF
     buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
     buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -271,7 +270,7 @@ lua <<EOF
 
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
-  local servers = { 'tsserver' }
+  local servers = { 'tsserver', 'intelephense' }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       capabilities = capabilities,
