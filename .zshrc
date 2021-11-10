@@ -92,7 +92,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
-fpath+=('/home/george/.npm-global/lib/node_modules/pure-prompt/functions')
+fpath+=('/Users/george/.npm-global/lib/node_modules/pure-prompt/functions')
 
 autoload -U promptinit; promptinit
 PURE_CMD_MAX_EXEC_TIME=10
@@ -146,7 +146,9 @@ export PATH=$HOME/android-studio/bin:$PATH
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias dc="docker-compose"
+alias k="kubectl"
 alias dce="docker-compose exec" 
+alias dcl="docker-compose logs -f" 
 alias d="docker"
 alias psc="psc-package"
 alias untar="tar -zvf"
@@ -158,17 +160,26 @@ alias goto="ssh george@stuff"
 alias tmux="env TERM=xterm-256color tmux"
 
 ###-tns-completion-start-###
-if [ -f /home/george/.tnsrc ]; then 
-    source /home/george/.tnsrc 
+if [ -f /Users/george/.tnsrc ]; then 
+    source /Users/george/.tnsrc 
 fi
 
 ###-tns-completion-end-###
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/george/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/george/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/george/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/george/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/george/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/george/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/george/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/george/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source /home/george/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /Users/george/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+export PATH="/usr/local/lib/node_modules:$PATH"
+export NODE_PATH=`npm root -g`
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+export PATH="/usr/local/opt/php@7.4/bin:$PATH"
+export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
