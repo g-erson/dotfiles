@@ -10,8 +10,11 @@ if exists('g:gui_oni')
 else 
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
+  "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  "Plug 'junegunn/fzf.vim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 
   Plug 'pangloss/vim-javascript'
@@ -126,20 +129,37 @@ vnoremap > >gv
 vnoremap : :s/\%V
 
 "============================= FZF bindings =================================
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
-let $FZF_DEFAULT_COMMAND = 'ag -l --ignore node_modules -g ""'
-nnoremap <C-b> :Buffers<CR>
-nnoremap <C-p> :FZF<CR>
-nnoremap <C-f> :Ag<CR>
-let g:fzf_buffers_jump = 1
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit' }
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
+"command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+"let $FZF_DEFAULT_COMMAND = 'ag -l --ignore node_modules -g ""'
+"nnoremap <C-b> :Buffers<CR>
+"nnoremap <C-p> :FZF<CR>
+"nnoremap <C-f> :Ag<CR>
+"let g:fzf_buffers_jump = 1
+"let g:fzf_action = {
+"  \ 'ctrl-t': 'tab split',
+"  \ 'ctrl-s': 'split',
+"  \ 'ctrl-v': 'vsplit' }
+"autocmd! FileType fzf
+"autocmd  FileType fzf set laststatus=0 noshowmode noruler
+"  \| autocmd BufLeave <buffer> se" Find files using Telescope command-line sugar.
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <C-f> <cmd>Telescope live_grep<cr>
+nnoremap <C-b> <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>t laststatus=2 showmode ruler
+lua <<EOF
+  require('telescope').setup {
+    extensions = {
+      fzf = {
+        fuzzy = true,                    -- false will only do exact matching
+        override_generic_sorter = true,  -- override the generic sorter
+        override_file_sorter = true,     -- override the file sorter
+        case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                                        -- the default case_mode is "smart_case"
+      }
+    }
+  }
+  require('telescope').load_extension('fzf')
+EOF
 "=========================== Easy split window navigation ===================
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
