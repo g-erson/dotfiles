@@ -68,7 +68,6 @@ plugins=(
     colorize 
     docker 
     docker-compose
-    django 
     git 
     git-extras 
     git-flow 
@@ -77,7 +76,6 @@ plugins=(
     node
     npm 
     node 
-    osx 
     pip 
     python 
     sudo 
@@ -160,20 +158,19 @@ alias goto="ssh george@stuff"
 alias tmux="env TERM=xterm-256color tmux"
 
 ###-tns-completion-start-###
-if [ -f /Users/george/.tnsrc ]; then 
-    source /Users/george/.tnsrc 
+if [ -f /Users/g-erson/.tnsrc ]; then 
+    source /Users/g-erson/.tnsrc 
 fi
 
 ###-tns-completion-end-###
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/george/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/george/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/g-erson/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/g-erson/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/george/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/george/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/g-erson/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/g-erson/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source /Users/george/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="/usr/local/lib/node_modules:$PATH"
 export NODE_PATH=`npm root -g`
@@ -183,3 +180,8 @@ export NVM_DIR="$HOME/.nvm"
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
 export PATH="/usr/local/opt/php@7.4/bin:$PATH"
 export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
+export PATH="/Users/g-erson/projects/faust2er301/bin:$PATH"
+
+[ -f "/Users/g-erson/.ghcup/env" ] && source "/Users/g-erson/.ghcup/env" # ghcup-env
+
+export ARDUINO_LIBRARY_ENABLE_UNSAFE_INSTALL=true

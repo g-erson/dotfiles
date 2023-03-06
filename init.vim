@@ -8,16 +8,13 @@ if exists('g:gui_oni')
   set laststatus=0
   set noshowcmd
 else 
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
+  Plug 'nvim-lualine/lualine.nvim'
   "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   "Plug 'junegunn/fzf.vim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
-
-  Plug 'pangloss/vim-javascript'
   Plug 'maxmellon/vim-jsx-pretty'
 
   " Async autocompletion
@@ -36,21 +33,20 @@ else
 endif
 
 Plug 'jeetsukumaran/vim-buffergator'
+Plug 'MunifTanjim/nui.nvim'
+"Plug 'folke/noice.nvim' --super slow
+"Plug 'rcarriga/nvim-notify' --really slow
+Plug 'smjonas/inc-rename.nvim'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'joshdick/onedark.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'navarasu/onedark.nvim'
+Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
+Plug 'nvim-tree/nvim-tree.lua'
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'purescript-contrib/purescript-vim'
-Plug 'neovimhaskell/haskell-vim',
-Plug 'StanAngeloff/php.vim'
-Plug 'HerringtonDarkholme/yats.vim'
 Plug 'frigoeu/psc-ide-vim'
-Plug 'toyamarinyon/vim-swift'
-Plug 'lumiliet/vim-twig'
 Plug 'posva/vim-vue'
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'neovim/nvim-lspconfig'
@@ -59,14 +55,24 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
-
-" For vsnip users.
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'amadeus/vim-mjml'
+Plug 'gmoe/vim-faust'
+Plug 'akinsho/git-conflict.nvim'
+Plug 'SirVer/ultisnips'
+Plug 'dense-analysis/neural'
+Plug 'metakirby5/codi.vim'
 call plug#end()
 
 set completeopt=menu,menuone,noselect
 
+"================================= inc-rename =================================
+nnoremap <leader>R :IncRename 
+"================================= Codi =================================
+let g:codi#virtual_text_pos = 'right_align'
+"===================================== Gitgutter ===========================
+let g:gitgutter_realtime = 1
+set updatetime=250
 "=========================== Visual Search Text =============================
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 "================= Decrease time waiting between keypresses  ================
@@ -127,7 +133,18 @@ endif
 vnoremap < <gv
 vnoremap > >gv
 vnoremap : :s/\%V
+"============================= Nvim Tree ====================================
+lua <<EOF
+  -- disable netrw at the very start of your init.lua (strongly advised)
+  vim.g.loaded_netrw = 1
+  vim.g.loaded_netrwPlugin = 1
 
+  -- set termguicolors to enable highlight groups
+  vim.opt.termguicolors = true
+
+  -- empty setup using defaults
+  require("nvim-tree").setup()
+EOF
 "============================= FZF bindings =================================
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 "let $FZF_DEFAULT_COMMAND = 'ag -l --ignore node_modules -g ""'
@@ -147,6 +164,7 @@ nnoremap <C-f> <cmd>Telescope live_grep<cr>
 nnoremap <C-b> <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>t laststatus=2 showmode ruler
 lua <<EOF
+  require("inc_rename").setup()
   require('telescope').setup {
     extensions = {
       fzf = {
@@ -159,6 +177,74 @@ lua <<EOF
     }
   }
   require('telescope').load_extension('fzf')
+  -- Setup noice.
+  --[[
+  require("noice").setup({
+    cmdline = {
+      enabled = true,
+      format = {
+        -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
+        -- view: (default is cmdline view)
+        -- opts: any options passed to the view
+        -- icon_hl_group: optional hl_group for the icon
+        -- title: set to anything or empty string to hide
+        cmdline = { pattern = "^:", icon = "❯", lang = "vim" },
+        search_down = { kind = "search", pattern = "^/", icon = "/", lang = "regex" },
+        search_up = { kind = "search", pattern = "^%?", icon = "/", lang = "regex" },
+        filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
+        lua = { pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
+        help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
+        input = {}, -- Used by input()
+      },
+    },
+    lsp = {
+      -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+      override = {
+        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+        ["vim.lsp.util.stylize_markdown"] = true,
+        ["cmp.entry.get_documentation"] = true,
+      },
+    },
+    views = {
+      cmdline_popup = {
+        position = {
+          row = 24,
+          col = "50%",
+        },
+        size = {
+          width = 60,
+          height = "auto",
+        },
+      },
+      popupmenu = {
+        relative = "editor",
+        position = {
+          row = 8,
+          col = "50%",
+        },
+        size = {
+          width = 60,
+          height = 10,
+        },
+        border = {
+          style = "rounded",
+          padding = { 0, 1 },
+        },
+        win_options = {
+          winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
+        },
+      },
+    },
+    -- you can enable a preset for easier configuration
+    presets = {
+      bottom_search = false, -- use a classic bottom cmdline for search
+      command_palette = false, -- position the cmdline and popupmenu together
+      long_message_to_split = true, -- long messages will be sent to a split
+      lsp_doc_border = false, -- add a border to hover docs and signature help
+      inc_rename = true, -- enables an input dialog for inc-rename.nvim
+    },
+  })
+  ]]--
 EOF
 "=========================== Easy split window navigation ===================
 nnoremap <C-h> <C-w>h
@@ -181,7 +267,7 @@ au BufWritePost .nvimrc so ~/.nvimrc
 
 "==============================  leader shortcuts ===========================
 let mapleader = ","
-nnoremap <leader>n :NERDTreeToggle<enter>
+nnoremap <leader>n :NvimTreeToggle<enter>
 nnoremap <leader>s <C-w>s
 nnoremap <leader>v <C-w>v
 nnoremap <leader>c <C-w>c
@@ -193,11 +279,19 @@ nnoremap <leader>h :BuffergatorMruCyclePrev<CR>
 nnoremap <leader>gp <Plug>GitGutterPreviewHunk
 nnoremap <leader>gu <Plug>GitGutterUndoHunk
 "nnoremap <leader>gs <Plug>GitGutterStageHunk
-nnoremap <leader>T <C-w>T:NERDTree<enter>
+nnoremap <leader>T <C-w>T:NvimTreeFocus<enter>
 nnoremap <silent> <leader>gd :Git diff :0<enter>
 nnoremap <silent> <leader>gb :Git blame <enter>
 nnoremap <silent> <leader>gw :Gw <enter>
 nnoremap <silent> <leader>gs :Git <enter>
+"================================= Neural AI ============================
+let g:neural = {
+\   'source': {
+\       'openai': {
+\           'api_key': $OPENAI_API_KEY,
+\       },
+\   },
+\}
 
 "================================= LSP ==================================
 lua <<EOF
@@ -217,6 +311,7 @@ lua <<EOF
     },
     mapping = {
       ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'}),
+      ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'}),
       ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
@@ -255,7 +350,7 @@ lua <<EOF
   })
 
   -- Setup lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
   local on_attach = function(client, bufnr)
@@ -280,17 +375,17 @@ lua <<EOF
     buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+    buf_set_keymap('n', '<space>rf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+    buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+    buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
     buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-    buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
   end
 
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
-  local servers = { 'tsserver', 'intelephense' }
+  local servers = { 'tsserver', 'intelephense', 'hls', 'eslint' }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       capabilities = capabilities,
@@ -300,24 +395,55 @@ lua <<EOF
       }
     }
   end
+
 EOF
 "=================================== Colourscheme ===========================
 set background=dark
-let g:onedark_terminal_italics=1
-colorscheme onedark
+lua <<EOF
+  require('onedark').setup {
+    style = 'cool',
+    colors = {
+      bg0 = "#212A3B",    -- define a new color
+    },
+  }
+  require('onedark').load()
+EOF
 "================================== Remap Esc Key ===========================
 imap jk <Esc>
 "============================= Fix Backspace ================================
 set backspace=2
-"============================ Airline Config ================================
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline_powerline_fonts = 1 "git clone git@github.com:powerline/fonts.git
-                                  "./install.sh
-let g:airline_theme='onedark'
-if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-  endif
-let g:airline_symbols.space = "\ua0"
+"============================ LuaLine Config ================================
+lua << END
+  require('lualine').setup {
+    options = {
+      theme = 'onedark',
+      component_separators = '|',
+      section_separators = { left = '', right = '' },
+    },
+    sections = {
+      lualine_a = {
+        { 'mode', separator = { left = '' }, right_padding = 2 },
+      },
+      lualine_b = { 'filename', 'branch' },
+      lualine_c = { 'fileformat' },
+      lualine_x = {},
+      lualine_y = { 'filetype', 'progress' },
+      lualine_z = {
+        { 'location', separator = { right = '' }, left_padding = 2 },
+      },
+    },
+    inactive_sections = {
+      lualine_a = { 'filename' },
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = {},
+      lualine_y = {},
+      lualine_z = { 'location' },
+    },
+    tabline = {},
+    extensions = {},
+  }
+END
 "========================  Enter insert mode terminals ======================
 autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
 "======================  Indent 4 spaces for PHP... :( ======================
