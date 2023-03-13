@@ -61,16 +61,17 @@ Plug 'gmoe/vim-faust'
 Plug 'akinsho/git-conflict.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'dense-analysis/neural'
-Plug 'metakirby5/codi.vim'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'HerringtonDarkholme/yats'
+Plug 'StanAngeloff/php.vim'
 call plug#end()
 
 set completeopt=menu,menuone,noselect
+set fillchars=vert:\ 
 
-"================================= inc-rename =================================
+"================================= inc-rename ===============================
 nnoremap <leader>R :IncRename 
-"================================= Codi =================================
-let g:codi#virtual_text_pos = 'right_align'
-"===================================== Gitgutter ===========================
+"===================================== Gitgutter ============================
 let g:gitgutter_realtime = 1
 set updatetime=250
 "=========================== Visual Search Text =============================
@@ -177,74 +178,6 @@ lua <<EOF
     }
   }
   require('telescope').load_extension('fzf')
-  -- Setup noice.
-  --[[
-  require("noice").setup({
-    cmdline = {
-      enabled = true,
-      format = {
-        -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
-        -- view: (default is cmdline view)
-        -- opts: any options passed to the view
-        -- icon_hl_group: optional hl_group for the icon
-        -- title: set to anything or empty string to hide
-        cmdline = { pattern = "^:", icon = "❯", lang = "vim" },
-        search_down = { kind = "search", pattern = "^/", icon = "/", lang = "regex" },
-        search_up = { kind = "search", pattern = "^%?", icon = "/", lang = "regex" },
-        filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
-        lua = { pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
-        help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
-        input = {}, -- Used by input()
-      },
-    },
-    lsp = {
-      -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-      override = {
-        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-        ["vim.lsp.util.stylize_markdown"] = true,
-        ["cmp.entry.get_documentation"] = true,
-      },
-    },
-    views = {
-      cmdline_popup = {
-        position = {
-          row = 24,
-          col = "50%",
-        },
-        size = {
-          width = 60,
-          height = "auto",
-        },
-      },
-      popupmenu = {
-        relative = "editor",
-        position = {
-          row = 8,
-          col = "50%",
-        },
-        size = {
-          width = 60,
-          height = 10,
-        },
-        border = {
-          style = "rounded",
-          padding = { 0, 1 },
-        },
-        win_options = {
-          winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
-        },
-      },
-    },
-    -- you can enable a preset for easier configuration
-    presets = {
-      bottom_search = false, -- use a classic bottom cmdline for search
-      command_palette = false, -- position the cmdline and popupmenu together
-      long_message_to_split = true, -- long messages will be sent to a split
-      lsp_doc_border = false, -- add a border to hover docs and signature help
-      inc_rename = true, -- enables an input dialog for inc-rename.nvim
-    },
-  })
-  ]]--
 EOF
 "=========================== Easy split window navigation ===================
 nnoremap <C-h> <C-w>h
@@ -276,8 +209,8 @@ nnoremap <leader>t :tabnew<enter>
 nnoremap <leader>w :w<enter>
 nnoremap <leader>l :BuffergatorMruCycleNext<CR>
 nnoremap <leader>h :BuffergatorMruCyclePrev<CR>
-nnoremap <leader>gp <Plug>GitGutterPreviewHunk
-nnoremap <leader>gu <Plug>GitGutterUndoHunk
+nnoremap <leader>gp <Plug>(GitGutterPreviewHunk)
+nnoremap <leader>gu <Plug>(GitGutterUndoHunk)
 "nnoremap <leader>gs <Plug>GitGutterStageHunk
 nnoremap <leader>T <C-w>T:NvimTreeFocus<enter>
 nnoremap <silent> <leader>gd :Git diff :0<enter>
