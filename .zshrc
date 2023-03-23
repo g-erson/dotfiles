@@ -173,7 +173,7 @@ if [ -f '/Users/g-erson/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then .
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="/usr/local/lib/node_modules:$PATH"
-export NODE_PATH=`npm root -g`
+export NODE_PATH=$NODE_PATH:`npm root -g`
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -183,5 +183,8 @@ export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
 export PATH="/Users/g-erson/projects/faust2er301/bin:$PATH"
 
 [ -f "/Users/g-erson/.ghcup/env" ] && source "/Users/g-erson/.ghcup/env" # ghcup-env
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
 
 export ARDUINO_LIBRARY_ENABLE_UNSAFE_INSTALL=true
