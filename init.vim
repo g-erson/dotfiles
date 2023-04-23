@@ -1,41 +1,36 @@
 
 call plug#begin('~/.vim/plugged')
 
-if exists('g:gui_oni')
-  " Onivim does all the below stuff itself, best leave it alone
-  set noshowmode
-  set noruler
-  set laststatus=0
-  set noshowcmd
-else 
-  Plug 'nvim-lualine/lualine.nvim'
-  "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  "Plug 'junegunn/fzf.vim'
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
-  Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+if exists('g:neovide')
+  "set guifont=LigaNovaMonoforwithligatures\ Nerd\ Font
+  "Plug 'folke/noice.nvim' "super slow
+  Plug 'rcarriga/nvim-notify' "really slow
+endif 
 
-  Plug 'maxmellon/vim-jsx-pretty'
+Plug 'nvim-lualine/lualine.nvim'
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
-  " Async autocompletion
-  " Completion from other opened files
-  Plug 'Shougo/context_filetype.vim'
+Plug 'maxmellon/vim-jsx-pretty'
 
-  " Table mode
-  Plug 'dhruvasagar/vim-table-mode'
-  let g:table_mode_corner_corner='+'
-  let g:table_mode_header_fillchar='='
+" Async autocompletion
+" Completion from other opened files
+Plug 'Shougo/context_filetype.vim'
 
-  if has('mouse')
-    set mouse=a
-  endif
+" Table mode
+Plug 'dhruvasagar/vim-table-mode'
+let g:table_mode_corner_corner='+'
+let g:table_mode_header_fillchar='='
+let g:neovide_confirm_quit=1
 
+if has('mouse')
+  set mouse=a
 endif
 
-Plug 'jeetsukumaran/vim-buffergator'
 Plug 'MunifTanjim/nui.nvim'
-"Plug 'folke/noice.nvim' --super slow
-"Plug 'rcarriga/nvim-notify' --really slow
 Plug 'smjonas/inc-rename.nvim'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-fugitive'
@@ -60,6 +55,7 @@ Plug 'amadeus/vim-mjml'
 Plug 'gmoe/vim-faust'
 Plug 'akinsho/git-conflict.nvim'
 Plug 'SirVer/ultisnips'
+Plug 'github/copilot'
 Plug 'dense-analysis/neural'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'HerringtonDarkholme/yats'
@@ -91,7 +87,7 @@ set clipboard=unnamedplus
 set nu
 set relativenumber
 "============================ Increase redrawtime  ==========================
-set redrawtime=10000
+"set redrawtime=10000 "Fixes syntax highlighing for large files
 set nofixendofline
 "============================ Sets colour syntax on =========================
 syn on!
@@ -143,8 +139,38 @@ lua <<EOF
   -- set termguicolors to enable highlight groups
   vim.opt.termguicolors = true
 
-  -- empty setup using defaults
-  require("nvim-tree").setup()
+  local HEIGHT_RATIO = 0.8
+  local WIDTH_RATIO = 0.5
+
+  require('nvim-tree').setup({
+    view = {
+      float = {
+        enable = true,
+        open_win_config = function()
+          local screen_w = vim.opt.columns:get()
+          local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+          local window_w = screen_w * WIDTH_RATIO
+          local window_h = screen_h * HEIGHT_RATIO
+          local window_w_int = math.floor(window_w)
+          local window_h_int = math.floor(window_h)
+          local center_x = (screen_w - window_w) / 2
+          local center_y = ((vim.opt.lines:get() - window_h) / 2)
+                          - vim.opt.cmdheight:get()
+          return {
+            border = 'rounded',
+            relative = 'editor',
+            row = center_y,
+            col = center_x,
+            width = window_w_int,
+            height = window_h_int,
+          }
+          end,
+      },
+      width = function()
+        return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
+      end,
+    },
+  })
 EOF
 "============================= FZF bindings =================================
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
@@ -184,6 +210,11 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+tnoremap <C-a>] <C-\><C-n>
 "================================ Turn Swap files off =======================
 set noswapfile
 set nobackup
@@ -205,27 +236,19 @@ nnoremap <leader>s <C-w>s
 nnoremap <leader>v <C-w>v
 nnoremap <leader>c <C-w>c
 nnoremap <leader>q <C-w>q
-nnoremap <leader>t :tabnew<enter>
+nnoremap <leader>t :terminal<CR>
 nnoremap <leader>w :w<enter>
 nnoremap <leader>l :BuffergatorMruCycleNext<CR>
 nnoremap <leader>h :BuffergatorMruCyclePrev<CR>
 nnoremap <leader>gp <Plug>(GitGutterPreviewHunk)
 nnoremap <leader>gu <Plug>(GitGutterUndoHunk)
+nnoremap <leader>bd :lclose<bar>b#<bar>bd #<CR>
 "nnoremap <leader>gs <Plug>GitGutterStageHunk
 nnoremap <leader>T <C-w>T:NvimTreeFocus<enter>
 nnoremap <silent> <leader>gd :Git diff :0<enter>
 nnoremap <silent> <leader>gb :Git blame <enter>
 nnoremap <silent> <leader>gw :Gw <enter>
 nnoremap <silent> <leader>gs :Git <enter>
-"================================= Neural AI ============================
-let g:neural = {
-\   'source': {
-\       'openai': {
-\           'api_key': $OPENAI_API_KEY,
-\       },
-\   },
-\}
-
 "================================= LSP ==================================
 lua <<EOF
   -- Setup nvim-cmp.
@@ -381,3 +404,20 @@ END
 autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
 "======================  Indent 4 spaces for PHP... :( ======================
 autocmd FileType php setlocal shiftwidth=4 tabstop=4
+"========================  Terminal background colours ======================
+autocmd TermOpen * setlocal listchars= | set nocursorline | set nocursorcolumn
+lua << END
+  vim.api.nvim_set_hl(0, "TermHighlight", {
+    bg = "#1E2126",
+    fg = "fg",
+  })
+  vim.api.nvim_create_augroup("_terminal", { clear = true })
+  vim.api.nvim_create_autocmd(
+    "TermOpen", 
+    { command = "setlocal winhighlight=Normal:TermHighlight", group = "_terminal", }
+  )
+END
+"========================  Setup Noice in Neovide ==========================
+if exists('g:neovide')
+  "lua require("noice").setup()
+endif
