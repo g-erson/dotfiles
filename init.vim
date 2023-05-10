@@ -2,14 +2,12 @@
 call plug#begin('~/.vim/plugged')
 
 if exists('g:neovide')
-  "set guifont=LigaNovaMonoforwithligatures\ Nerd\ Font
+  set guifont=LigaNovaMonoforwithligatures\ Nerd\ Font:h15
   "Plug 'folke/noice.nvim' "super slow
   Plug 'rcarriga/nvim-notify' "really slow
 endif 
 
 Plug 'nvim-lualine/lualine.nvim'
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -43,6 +41,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'frigoeu/psc-ide-vim'
 Plug 'posva/vim-vue'
+Plug 'github/copilot.vim'
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -50,16 +49,17 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-copilot'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'amadeus/vim-mjml'
 Plug 'gmoe/vim-faust'
 Plug 'akinsho/git-conflict.nvim'
 Plug 'SirVer/ultisnips'
-Plug 'github/copilot'
 Plug 'dense-analysis/neural'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'HerringtonDarkholme/yats'
 Plug 'StanAngeloff/php.vim'
+Plug 'gcmt/taboo.vim'
 call plug#end()
 
 set completeopt=menu,menuone,noselect
@@ -172,7 +172,7 @@ lua <<EOF
     },
   })
 EOF
-"============================= FZF bindings =================================
+"============================= Telescope bindings =================================
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 "let $FZF_DEFAULT_COMMAND = 'ag -l --ignore node_modules -g ""'
 "nnoremap <C-b> :Buffers<CR>
@@ -237,12 +237,18 @@ nnoremap <leader>v <C-w>v
 nnoremap <leader>c <C-w>c
 nnoremap <leader>q <C-w>q
 nnoremap <leader>t :terminal<CR>
+nnoremap <leader>1 :tabn 1<CR>
+nnoremap <leader>2 :tabn 2<CR>
+nnoremap <leader>3 :tabn 3<CR>
+nnoremap <leader>4 :tabn 4<CR>
+nnoremap <leader>5 :tabn 5<CR>
+nnoremap <leader>6 :tabn 6<CR>
+nnoremap <leader>7 :tabn 7<CR>
+nnoremap <leader>8 :tabn 8<CR>
 nnoremap <leader>w :w<enter>
-nnoremap <leader>l :BuffergatorMruCycleNext<CR>
-nnoremap <leader>h :BuffergatorMruCyclePrev<CR>
 nnoremap <leader>gp <Plug>(GitGutterPreviewHunk)
 nnoremap <leader>gu <Plug>(GitGutterUndoHunk)
-nnoremap <leader>bd :lclose<bar>b#<bar>bd #<CR>
+nnoremap <leader>bd :lclose<bar>b#<bar>bwipeout #<CR>
 "nnoremap <leader>gs <Plug>GitGutterStageHunk
 nnoremap <leader>T <C-w>T:NvimTreeFocus<enter>
 nnoremap <silent> <leader>gd :Git diff :0<enter>
@@ -264,10 +270,15 @@ lua <<EOF
         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
         -- require'snippy'.expand_snippet(args.body) -- For `snippy` users.
       end,
+    },  
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
     },
     mapping = {
       ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'}),
-      ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'}),
+      ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'}),
+      ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'}),
       ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
@@ -279,6 +290,7 @@ lua <<EOF
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
     },
     sources = cmp.config.sources({
+      { name = 'copilot' },
       { name = 'nvim_lsp' },
       { name = 'vsnip' }, -- For vsnip users.
       -- { name = 'luasnip' }, -- For luasnip users.
@@ -352,6 +364,8 @@ lua <<EOF
     }
   end
 
+  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
+  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
 EOF
 "=================================== Colourscheme ===========================
 set background=dark
