@@ -90,7 +90,8 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
-fpath+=('/Users/george/.npm-global/lib/node_modules/pure-prompt/functions')
+fpath+=('/Users/george/./lib/node_modules/pure-prompt/functions')
+fpath+=("$HOME/.nvm/versions/node/v16.8.0/lib/node_modules/pure-prompt/functions/")
 
 autoload -U promptinit; promptinit
 PURE_CMD_MAX_EXEC_TIME=10
@@ -173,6 +174,7 @@ if [ -f '/Users/g-erson/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then .
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="/usr/local/lib/node_modules:$PATH"
+export PATH="$HOME/.nvm/versions/node/v16.8.0/bin/:$PATH"
 export NODE_PATH=$NODE_PATH:`npm root -g`
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

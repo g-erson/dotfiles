@@ -254,7 +254,7 @@ nnoremap <leader>T <C-w>T:NvimTreeFocus<enter>
 nnoremap <silent> <leader>gd :Git diff :0<enter>
 nnoremap <silent> <leader>gb :Git blame <enter>
 nnoremap <silent> <leader>gw :Gw <enter>
-nnoremap <silent> <leader>gs :Git <enter>
+nnoremap <silent> <leader>gs :Telescope git_status <enter>
 "================================= LSP ==================================
 lua <<EOF
   -- Setup nvim-cmp.
