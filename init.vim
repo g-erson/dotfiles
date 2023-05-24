@@ -7,7 +7,9 @@ if exists('g:neovide')
   Plug 'rcarriga/nvim-notify' "really slow
 endif 
 
+Plug 'nanozuki/tabby.nvim'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'tiagovla/scope.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -191,6 +193,9 @@ nnoremap <C-f> <cmd>Telescope live_grep<cr>
 nnoremap <C-b> <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>t laststatus=2 showmode ruler
 lua <<EOF
+  require("scope").setup({
+      restore_state = false, -- experimental
+  })
   require("inc_rename").setup()
   require('telescope').setup {
     extensions = {
@@ -204,6 +209,7 @@ lua <<EOF
     }
   }
   require('telescope').load_extension('fzf')
+  require('telescope').load_extension('scope')
 EOF
 "=========================== Easy split window navigation ===================
 nnoremap <C-h> <C-w>h
@@ -214,7 +220,7 @@ tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
-tnoremap <C-a>] <C-\><C-n>
+tnoremap <C-a><C-[> <C-\><C-n>
 "================================ Turn Swap files off =======================
 set noswapfile
 set nobackup
@@ -410,9 +416,27 @@ lua << END
       lualine_y = {},
       lualine_z = { 'location' },
     },
-    tabline = {},
     extensions = {},
   }
+
+--============================ Tabby bindings ==================================
+  require('tabby.tabline').use_preset('active_wins_at_tail', {
+    theme = {
+      fill = 'TabLineFill', -- tabline background
+      head = 'TabLine', -- head element highlight
+      current_tab = 'TabLineSel', -- current tab label highlight
+      tab = 'TabLine', -- other tab label highlight
+      win = 'TabLine', -- window highlight
+      tail = 'TabLine', -- tail element highlight
+    },
+    nerdfont = true, -- whether use nerdfont
+    tab_name = {
+        name_fallback = 'function({tabid}), return a string',
+    },
+    buf_name = {
+        mode = "'unique'|'relative'|'tail'|'shorten'",
+    },
+  })
 END
 "========================  Enter insert mode terminals ======================
 autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
