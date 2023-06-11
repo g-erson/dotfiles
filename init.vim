@@ -1,11 +1,11 @@
 
 call plug#begin('~/.vim/plugged')
 
-if exists('g:neovide')
+"if exists('g:neovide')
   set guifont=LigaNovaMonoforwithligatures\ Nerd\ Font:h15
-  "Plug 'folke/noice.nvim' "super slow
+  Plug 'folke/noice.nvim' "super slow
   Plug 'rcarriga/nvim-notify' "really slow
-endif 
+"endif 
 
 Plug 'nanozuki/tabby.nvim'
 Plug 'nvim-lualine/lualine.nvim'
@@ -456,6 +456,6 @@ lua << END
   )
 END
 "========================  Setup Noice in Neovide ==========================
-if exists('g:neovide')
-  "lua require("noice").setup()
-endif
+"if exists('g:neovide')
+  lua require("noice").setup()
+"endif
