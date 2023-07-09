@@ -255,6 +255,7 @@ nnoremap <leader>w :w<enter>
 nnoremap <leader>gp <Plug>(GitGutterPreviewHunk)
 nnoremap <leader>gu <Plug>(GitGutterUndoHunk)
 nnoremap <leader>bd :lclose<bar>b#<bar>bwipeout #<CR>
+nnoremap <leader>md :Noice dismiss<CR>
 "nnoremap <leader>gs <Plug>GitGutterStageHunk
 nnoremap <leader>T <C-w>T:NvimTreeFocus<enter>
 nnoremap <silent> <leader>gd :Git diff :0<enter>
@@ -370,6 +371,15 @@ lua <<EOF
     }
   end
 
+  nvim_lsp['clangd'].setup {
+    cmd = vim.lsp.rpc.connect('127.0.0.1', 50505),
+    capabilities = capabilities,
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
 EOF
@@ -402,7 +412,13 @@ lua << END
       },
       lualine_b = { 'filename', 'branch' },
       lualine_c = { 'fileformat' },
-      lualine_x = {},
+      lualine_x = {
+        {
+          require("noice").api.statusline.mode.get,
+          cond = require("noice").api.statusline.mode.has,
+          color = { fg = "#ff9e64" },
+        }
+      },
       lualine_y = { 'filetype', 'progress' },
       lualine_z = {
         { 'location', separator = { right = '' }, left_padding = 2 },
