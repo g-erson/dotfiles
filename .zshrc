@@ -190,3 +190,4 @@ if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
 fi
 
 export ARDUINO_LIBRARY_ENABLE_UNSAFE_INSTALL=true
+eval "$(direnv hook zsh)"

@@ -62,11 +62,20 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'HerringtonDarkholme/yats'
 Plug 'StanAngeloff/php.vim'
 Plug 'gcmt/taboo.vim'
+Plug 'nvim-orgmode/orgmode'
 call plug#end()
 
 set completeopt=menu,menuone,noselect
 set fillchars=vert:\ 
 
+"============================== Haskell highlighting ========================
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 "================================= inc-rename ===============================
 nnoremap <leader>R :IncRename 
 "===================================== Gitgutter ============================
@@ -239,7 +248,9 @@ au BufWritePost .nvimrc so ~/.nvimrc
 let mapleader = ","
 nnoremap <leader>n :NvimTreeToggle<enter>
 nnoremap <leader>s <C-w>s
-nnoremap <leader>v <C-w>v
+nnoremap <leader>st <C-w>s:terminal<CR>
+nnoremap <leader>sv <C-w>v
+nnoremap <leader>svt <C-w>v<C-w>l:terminal<CR>
 nnoremap <leader>c <C-w>c
 nnoremap <leader>q <C-w>q
 nnoremap <leader>t :terminal<CR>
@@ -452,6 +463,29 @@ lua << END
     buf_name = {
         mode = "'unique'|'relative'|'tail'|'shorten'",
     },
+  })
+
+--============================ Orgmode ==================================
+
+  -- Load custom treesitter grammar for org filetype
+  require('orgmode').setup_ts_grammar()
+
+  -- Treesitter configuration
+  require('nvim-treesitter.configs').setup {
+    -- If TS highlights are not enabled at all, or disabled via `disable` prop,
+    -- highlighting will fallback to default Vim syntax highlighting
+    highlight = {
+      enable = true,
+      -- Required for spellcheck, some LaTex highlights and
+      -- code block highlights that do not have ts grammar
+      additional_vim_regex_highlighting = {'org'},
+    },
+    ensure_installed = {'org'}, -- Or run :TSUpdate org
+  }
+
+  require('orgmode').setup({
+    org_agenda_files = {'~/org-mode/**/*'},
+    org_default_notes_file = '~/org-mode/refile.org',
   })
 END
 "========================  Enter insert mode terminals ======================
