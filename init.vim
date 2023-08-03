@@ -369,6 +369,12 @@ lua <<EOF
     buf_set_keymap('n', ',f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
   end
 
+  local handlers =  {
+    ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = "rounded"}),
+    ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = "rounded" }),
+  }
+  vim.diagnostic.config {float = { border = "rounded" }}
+
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
   local servers = { 'tsserver', 'intelephense', 'hls', 'eslint' }
@@ -376,6 +382,7 @@ lua <<EOF
     nvim_lsp[lsp].setup {
       capabilities = capabilities,
       on_attach = on_attach,
+      handlers = handlers,
       flags = {
         debounce_text_changes = 150,
       }
@@ -386,13 +393,11 @@ lua <<EOF
     cmd = vim.lsp.rpc.connect('127.0.0.1', 50505),
     capabilities = capabilities,
     on_attach = on_attach,
+    handlers = handlers,
     flags = {
       debounce_text_changes = 150,
     }
   }
-
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
-  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
 EOF
 "=================================== Colourscheme ===========================
 set background=dark
@@ -495,6 +500,10 @@ autocmd FileType php setlocal shiftwidth=4 tabstop=4
 "========================  Terminal background colours ======================
 autocmd TermOpen * setlocal listchars= | set nocursorline | set nocursorcolumn
 lua << END
+  vim.api.nvim_set_hl(0, "FloatBorder", {bg="#232A39", fg="#4DBDCB"})
+  vim.api.nvim_set_hl(0, "NormalFloat", {bg="#232A39"})
+  vim.api.nvim_set_hl(0, "NvimTreeNormal", {bg="#232A39"})
+  vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer", {bg="#232A39"})
   vim.api.nvim_set_hl(0, "TermHighlight", {
     bg = "#1E2126",
     fg = "fg",
