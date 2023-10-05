@@ -122,6 +122,8 @@ au BufNewFile,BufRead *.vue set filetype=vue
 "=========================== Purescript Markup ==============================
 au BufNewFile,BufRead *.psc set filetype=purescript
 au BufNewFile,BufRead *.purs set filetype=purescript
+"=========================== Terraform Markup ===================================
+au BufNewFile,BufRead *.tf set filetype=hcl
 "=========================== QML Markup =====================================
 au BufNewFile,BufRead *.qml set filetype=qml
 "=========================== Swift Markup ===================================
@@ -229,7 +231,18 @@ tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
-tnoremap <C-a><C-[> <C-\><C-n>
+"tmux-like
+tnoremap <C-a>[ <C-\><C-n>
+tnoremap <C-a>% <C-\><C-n><C-w>s:terminal<CR>i
+nnoremap <C-a>" <C-\><C-n><C-w>v:terminal<CR>i
+tnoremap <C-a>x <C-\><C-n>:close<CR>
+"Weird shift/ctrl issue
+tnoremap <S-Backspace> <Backspace>
+tnoremap <C-Backspace> <Backspace>
+tnoremap <S-Space> <Space>
+tnoremap <C-Space> <Space>
+tnoremap <S-Enter> <Enter>
+tnoremap <C-Enter> <Enter>
 "================================ Turn Swap files off =======================
 set noswapfile
 set nobackup
