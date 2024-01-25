@@ -1,3 +1,5 @@
 [user]
 	name = g-erson 
 	email = g@erson.io
+[safe]
+	directory = /Volumes/remote/RealtimeOnline

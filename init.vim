@@ -280,6 +280,7 @@ nnoremap <leader>gp <Plug>(GitGutterPreviewHunk)
 nnoremap <leader>gu <Plug>(GitGutterUndoHunk)
 nnoremap <leader>bd :lclose<bar>b#<bar>bwipeout #<CR>
 nnoremap <leader>md :Noice dismiss<CR>
+nnoremap <leader>h :noh<CR>
 "nnoremap <leader>gs <Plug>GitGutterStageHunk
 nnoremap <leader>T <C-w>T:NvimTreeFocus<enter>
 nnoremap <silent> <leader>gd :Git diff :0<enter>
